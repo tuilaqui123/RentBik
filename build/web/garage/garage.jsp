@@ -10,6 +10,7 @@
         <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
         <link href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
         <script src="https://cdn.tailwindcss.com"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js" integrity="sha512-v2CJ7UaYy4JwqLDIrZUI/4hqeoQieOmAZNXBeQyjo21dadnwR+8ZaIJVT8EE2iyI61OV8e6M8PP2/4hpQINQ/g==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
         <title>RENTBIK</title>
     </head>
     <style>
@@ -82,9 +83,17 @@
                     </button>
                 </div>
                 <div class="flex flex-row justify-end items-center w-11/12 h-12 gap-4">
-                    <button class="flex flex-row items-center w-auto h-12 p-3 px-4 cursor-pointer bg-blue text-white rounded-lg">
+                    <button class="flex flex-row items-center w-auto h-12 p-3 px-4 cursor-pointer bg-blue text-white rounded-lg" onclick="showAddCar()">
                         <i class="fa-solid fa-plus mr-2"></i>
                         <p class="font-normal text-base">Thêm xe</p>
+                    </button>
+                    <button id="hangXe" class="flex flex-row items-center w-auto h-12 p-3 px-4 cursor-pointer bg-blue text-white rounded-lg" onclick="showAddBrand()">
+                        <i class="fa-solid fa-plus mr-2"></i>
+                        <p class="font-normal text-base">Thêm hãng xe</p>
+                    </button>
+                    <button id="dongXe" class="flex flex-row items-center w-auto h-12 p-3 px-4 cursor-pointer bg-blue text-white rounded-lg" onclick="showAddSeries()">
+                        <i class="fa-solid fa-plus mr-2"></i>
+                        <p class="font-normal text-base">Thêm dòng xe</p>
                     </button>
                     <button class="h-12 w-14 cursor-pointer bg-[#e4e4e4] text-[#7c7c7c] text-xl rounded-lg">
                         <i class="fa-solid fa-pen-to-square"></i>
@@ -171,6 +180,160 @@
                 </tbody>
             </table>
         </div>
+        <div class="absolute w-full h-auto py-20 top-0 flex items-center justify-center hidden overflow-hidden" id="addCar">
+            <div class="absolute w-full h-[200vh] bg-gray-400 opacity-75"></div>
+            <div class="z-10 w-1/3 h-4/5 h-auto bg-white relative z-10 rounded-lg px-5 py-7 shadow-lg shadow-black">
+                <div class="flex flex-row justify-between items-center mb-7">
+                    <p class="text-xl font-medium">THÊM XE</p>
+                    <i class="fa-solid fa-x text-lg font-black cursor-pointer hover:text-[#ff0000]" onclick="showAddCar()"></i>
+                </div>
+                <div class="mb-4">
+                    <p class="font-medium mb-1">Biển số xe</p>
+                    <input 
+                        type="text"
+                        placeholder="Biển số xe"
+                        class="w-full bg-[#e4e4e4] text-[#7c7c7c] text-base rounded-lg outline-none h-9 indent-2"
+                        id="bienSoXe"
+                    />
+                </div>
+                <div class="mb-4">
+                    <p class="font-medium mb-1">Loại xe</p>
+                    <input 
+                        type="text"
+                        placeholder="Loại xe"
+                        class="w-full bg-[#e4e4e4] text-[#7c7c7c] text-base rounded-lg outline-none h-9 indent-2"
+                        id="loaiXe"
+                    />
+                </div>
+                <div class="mb-4">
+                    <p class="font-medium mb-1">Tên hãng</p>
+                    <input 
+                        type="text"
+                        placeholder="Họ và tên"
+                        class="w-full bg-[#e4e4e4] text-[#7c7c7c] text-base rounded-lg outline-none h-9 indent-2"
+                        id="tenHang"
+                    />
+                </div>
+                <div class="mb-4">
+                    <p class="font-medium mb-1">Dòng xe</p>
+                    <input 
+                        type="text"
+                        placeholder="Số điện thoại"
+                        class="w-full bg-[#e4e4e4] text-[#7c7c7c] text-base rounded-lg outline-none h-9 indent-2"
+                        id="dongXe"
+                    />
+                </div>
+                
+                <div class="mb-4">
+                    <p class="font-medium mb-1">Giá mua</p>
+                    <input 
+                        type="text"
+                        class="w-full bg-[#e4e4e4] text-[#7c7c7c] text-base rounded-lg outline-none h-9 indent-2"
+                        id="giaMua"
+                    />
+                </div>
+                <div class="mb-4">
+                    <p class="font-medium mb-1">Ngày mua</p>
+                    <input 
+                        type="date"
+                        placeholder="Ngày sinh"
+                        class="w-full bg-[#e4e4e4] text-[#7c7c7c] text-base rounded-lg outline-none h-9 indent-2 pr-2"
+                        id="ngayMua"
+                    />
+                </div>
+                <div class="mb-4 flex">
+                    <div class="mr-2">
+                        <p class="font-medium mb-1">Mã bảo hiểm (nếu có)</p>
+                        <input 
+                            type="text"
+                            class="w-full bg-[#e4e4e4] text-[#7c7c7c] text-base rounded-lg outline-none h-9 indent-2"
+                            id="maBH"
+                        />
+                    </div>
+                    <div class="w-[50%]">
+                        <p class="font-medium mb-1">Ngày hết hạn</p>
+                        <input 
+                            type="date"
+                            class="w-full bg-[#e4e4e4] text-[#7c7c7c] text-base rounded-lg outline-none h-9 indent-2"
+                            id="ngayHetHan"
+                        />
+                    </div>
+                </div>
+                <div class="mb-7">
+                    <p class="font-medium mb-1">Ghi chú</p>
+                    <input 
+                        type="text"
+                        class="w-full bg-[#e4e4e4] text-[#7c7c7c] text-base rounded-lg outline-none h-9 indent-2"
+                        id="ghiChu"
+                    />
+                </div>
+                <div class="w-full flex justify-center items-center h-10">
+                    <button class="w-1/3 h-full px-4 cursor-pointer bg-blue text-white rounded-lg">
+                        <p class="text-lg font-medium">Thêm</p>
+                    </button>
+                </div>
+            </div>
+        </div>
+        
+        <div class="w-full h-screen absolute top-0  flex items-center justify-center hidden" id="addBrand">
+            <div class="absolute w-full h-[100vh] bg-gray-400 opacity-75"></div>
+            <div class="z-10 w-1/3 h-4/5 h-auto bg-white relative z-10 rounded-lg px-5 py-7 shadow-lg shadow-black">
+                <div class="flex flex-row justify-between items-center mb-7">
+                    <p class="text-xl font-medium">TÊN HÃNG</p>
+                    <i class="fa-solid fa-x text-lg font-black cursor-pointer hover:text-[#ff0000]" onclick="showAddBrand()"></i>
+                </div>
+                <div class="mb-4 flex justify-center items-center">
+                    <i id="iconThemTenHang" class="fa-solid fa-plus mr-2 text-lg text-gray-400 cursor-pointer hover:text-[#ff0000]"></i>
+                    <input 
+                        type="text"
+                        placeholder="Thêm tên hãng"
+                        class="w-full text-[#7c7c7c] text-base rounded-lg outline-none h-9 indent-2"
+                        id="themTenHang"
+                    />
+                </div> 
+                <div class="mb-4 flex justify-center items-center">
+                    <i id="iconTimTenHang" class="fa-solid fa-search mr-2 text-lg text-gray-400 cursor-pointer hover:text-[#ff0000]"></i>
+                    <input 
+                        type="text"
+                        placeholder="Tìm tên hãng"
+                        class="w-full text-[#7c7c7c] text-base rounded-lg outline-none h-9 indent-2"
+                        id="timTenHang"
+                    />
+                </div>
+                <div id="listBrand">
+                </div>
+            </div>
+        </div>
+        
+        <div class="w-full h-screen absolute top-0 flex items-center justify-center hidden" id="addSeries">
+            <div class="absolute w-full h-[100vh] bg-gray-400 opacity-75"></div>
+            <div class="z-10 w-1/3 h-4/5 h-auto bg-white relative z-10 rounded-lg px-5 py-7 shadow-lg shadow-black">
+                <div class="flex flex-row justify-between items-center mb-7">
+                    <p class="text-xl font-medium">DÒNG XE</p>
+                    <i class="fa-solid fa-x text-lg font-black cursor-pointer hover:text-[#ff0000]" onclick="showAddSeries()"></i>
+                </div>
+                <div class="mb-4 flex justify-center items-center">
+                    <i id="iconThemTenHang" class="fa-solid fa-plus mr-2 text-lg text-gray-400 cursor-pointer hover:text-[#ff0000]"></i>
+                    <input 
+                        type="text"
+                        placeholder="Thêm dòng xe"
+                        class="w-full text-[#7c7c7c] text-base rounded-lg outline-none h-9 indent-2"
+                        id="themDongXe"
+                    />
+                </div> 
+                <div class="mb-4 flex justify-center items-center">
+                    <i id="iconTimTenHang" class="fa-solid fa-search mr-2 text-lg text-gray-400 cursor-pointer hover:text-[#ff0000]"></i>
+                    <input 
+                        type="text"
+                        placeholder="Tìm tên dòng xe"
+                        class="w-full text-[#7c7c7c] text-base rounded-lg outline-none h-9 indent-2"
+                        id="tenDongXe"
+                    />
+                </div>
+                <div id="listBrand">
+                </div>
+            </div>
+        </div>
     </body>
     <script>
         tailwind.config = {
@@ -189,4 +352,5 @@
         ;
 
     </script>
+    <script src="../js/garage.js"></script>
 </html>

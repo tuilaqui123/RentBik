@@ -116,8 +116,9 @@
             </table>
         </div>
         <!--            add customer-->
-        <div class="w-full h-screen absolute top-0  flex items-center justify-center hidden" id="addCustomer">
-            <div class="w-1/3 h-4/5 h-auto bg-white relative z-10 rounded-lg p-5 py-7 shadow-lg shadow-black">
+        <div class="absolute w-full h-auto py-20 top-0 flex items-center justify-center hidden overflow-hidden" id="addCustomer">
+            <div class="absolute w-full h-[200vh] bg-gray-400 opacity-75"></div>
+            <div class="z-10 w-1/3 h-4/5 h-auto bg-white relative z-10 rounded-lg px-5 py-7 shadow-lg shadow-black">
                 <div class="flex flex-row justify-between items-center mb-7">
                     <p class="text-xl font-medium">THÊM KHÁCH HÀNG</p>
                     <i class="fa-solid fa-x text-lg font-black cursor-pointer hover:text-[#ff0000]" onclick="showAddCustomer()"></i>

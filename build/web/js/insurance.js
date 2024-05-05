@@ -1,3 +1,8 @@
+function showAddCar(){
+    var addCar = document.getElementById('addCar');
+    addCar.classList.toggle("hidden");
+}
+
 // Thêm bảo hiểm xe
 async function addInsurance(){
     var mabh = document.getElementById("mabh").value;
@@ -84,7 +89,7 @@ async function getInsurances(){
                 const cell = document.createElement('td');
                 cell.classList.add('px-6', 'py-4', 'font-normal', 'whitespace-nowrap');
                 if (!item[prop]){
-                    cell.textContent = "Không xác định";
+                    cell.textContent = "Không có";
                 }else{
                     if (prop === 'purchaseDate' || prop === 'expiredDate'){
                         const formattedDate = new Date(item[prop]).toLocaleDateString('en-GB');
