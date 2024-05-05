@@ -120,8 +120,8 @@
                         
                     </tr>
                 </thead>
-                <tbody>
-                    <tr class="bg-bone border-b  ">
+                <tbody id="tableInsurance">
+<!--                    <tr class="bg-bone border-b  ">
                         <th scope="row" class="px-6 py-4 font-normal">
                             1
                         </th>
@@ -141,7 +141,7 @@
                             150.000
                         </td>
                         
-                    </tr>
+                    </tr>-->
                     
                     
                 </tbody>
@@ -165,4 +165,5 @@
         ;
 
     </script>
+    <script src="../js/insurance.js"></script>
 </html>

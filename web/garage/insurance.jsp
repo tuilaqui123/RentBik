@@ -109,6 +109,7 @@
                         <div class="w-full">
                             <p class="text-base font-medium">Mã bảo hiểm xe</p>
                             <input 
+                                id="mabh"
                                 type="text"
                                 placeholder="Mã bảo hiểm"
                                 class="w-full h-12 text-base  text-black rounded-lg outline-none placeholder-black indent-3"
@@ -119,6 +120,7 @@
                         <div class="w-1/3">
                             <p class="text-base font-medium">Ngày mua</p>
                             <input 
+                                id="ngayMua"
                                 type="date"
                                 class="mt-1 w-full h-12 text-base  text-black rounded-lg outline-none placeholder-black px-3"
                                 />
@@ -126,6 +128,7 @@
                         <div class="w-1/3">
                             <p class="text-base font-medium">Ngày hết hạn</p>
                             <input 
+                                id="ngayHetHan"
                                 type="date"
                                 class="mt-1 w-full h-12 text-base  text-black rounded-lg outline-none placeholder-black px-3"
                                 />
@@ -133,13 +136,14 @@
                         <div class="w-1/3">
                             <p class="text-base font-medium">Giá mua</p>
                             <input 
+                                id="giaMua"
                                 type="text"
                                 class="mt-1 w-full h-12 text-base text-black rounded-lg outline-none placeholder-black indent-3"
                                 />
                         </div>
                     </div>
                     <div class="w-full mt-5 flex justify-center">
-                        <button class="h-12 w-1/6 cursor-pointer bg-blue text-white  rounded-lg">
+                        <button onclick="addInsurance()" class="h-12 w-1/6 cursor-pointer bg-blue text-white  rounded-lg">
                             <p class="font-medium text-xl">Thêm</p>
                         </button>
                     </div>
@@ -162,6 +166,6 @@
             }
         }
         ;
-
     </script>
+    <script src="../js/insurance.js"></script>
 </html>

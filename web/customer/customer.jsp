@@ -10,6 +10,7 @@
         <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
         <link href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
         <script src="https://cdn.tailwindcss.com"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js" integrity="sha512-v2CJ7UaYy4JwqLDIrZUI/4hqeoQieOmAZNXBeQyjo21dadnwR+8ZaIJVT8EE2iyI61OV8e6M8PP2/4hpQINQ/g==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
         <title>RENTBIK</title>
     </head>
     <style>
@@ -48,12 +49,13 @@
                 <div class="w-11/12 relative flex items-center">
                     <i class="fa-solid fa-magnifying-glass absolute ml-5 text-lg "></i>
                     <input 
+                        id="searchInput"
                         type="text"
                         placeholder="Tìm kiếm"
                         class=" w-full h-full pl-14 text-lg bg-[#F4EBD9] text-black rounded-lg outline-none placeholder-black"
-                        />
+                    />
                 </div>
-                <button class="w-28 p-3 cursor-pointer bg-blue text-white rounded-lg">
+                <button id="btnSearch" class="w-28 p-3 cursor-pointer bg-blue text-white rounded-lg">
                     <i class="fa-solid fa-magnifying-glass"></i>
                 </button>
             </div>
@@ -108,30 +110,8 @@
                         </th>
                     </tr>
                 </thead>
-                <tbody>
-                    <tr class="bg-bone border-b ">
-                        <th scope="row" class="px-6 py-4 font-normal whitespace-nowrap">
-                            1
-                        </th>
-                        <td class="px-6 py-4">
-                            Phạm Ngọc Qúi
-                        </td>
-                        <td class="px-6 py-4">
-                            17/08/2003
-                        </td>
-                        <td class="px-6 py-4">
-                            099988881234
-                        </td>
-                        <td class="px-6 py-4">
-                            0912725561
-                        </td>
-                        <td class="px-6 py-4">
-                            B1
-                        </td>
-                        <td class="px-6 py-4">
-                            Qúa đẹp trai
-                        </td>
-                    </tr>
+                <tbody id="tableCustomer">
+                    
                 </tbody>
             </table>
         </div>
@@ -143,11 +123,21 @@
                     <i class="fa-solid fa-x text-lg font-black cursor-pointer hover:text-[#ff0000]" onclick="showAddCustomer()"></i>
                 </div>
                 <div class="mb-4">
+                    <p class="font-medium mb-1">CCCD</p>
+                    <input 
+                        type="text"
+                        placeholder="Căn cước công dân"
+                        class="w-full bg-[#e4e4e4] text-[#7c7c7c] text-base rounded-lg outline-none h-9 indent-2"
+                        id="cccd"
+                    />
+                </div>
+                <div class="mb-4">
                     <p class="font-medium mb-1">Họ và tên</p>
                     <input 
                         type="text"
                         placeholder="Họ và tên"
                         class="w-full bg-[#e4e4e4] text-[#7c7c7c] text-base rounded-lg outline-none h-9 indent-2"
+                        id="hoVaTen"
                     />
                 </div>
                 <div class="mb-4">
@@ -156,6 +146,7 @@
                         type="date"
                         placeholder="Ngày sinh"
                         class="w-full bg-[#e4e4e4] text-[#7c7c7c] text-base rounded-lg outline-none h-9 indent-2 pr-2"
+                        id="ngaySinh"
                     />
                 </div>
                 <div class="mb-4">
@@ -164,21 +155,26 @@
                         type="text"
                         placeholder="Số điện thoại"
                         class="w-full bg-[#e4e4e4] text-[#7c7c7c] text-base rounded-lg outline-none h-9 indent-2"
+                        id="soDienThoai"
                     />
                 </div>
                 <div class="mb-4">
                     <p class="font-medium mb-1">Giấy phép lái xe</p>
                     <div class="flex flex-row items-center gap-4 h-8">
-                        <input 
+                        <select id="selectedGplx" class="border border-gray-300 rounded-lg h-10 text-black w-full cursor-pointer bg-[#e4e4e4]">
+                        
+                        </select>
+<!--                        <input 
                             type="text"
                             placeholder="Hạng"
                             class="w-1/2 bg-[#e4e4e4] text-[#7c7c7c] text-base rounded-lg outline-none h-9 indent-2"
+                            id="gplx"
                         />
                         <input 
                             type="text"
                             placeholder="Mã"
                             class="w-1/2 bg-[#e4e4e4] text-[#7c7c7c] text-base rounded-lg outline-none h-9 indent-2"
-                        />
+                        />-->
                     </div>
 
                 </div>
@@ -187,10 +183,11 @@
                     <input 
                         type="text"
                         class="w-full bg-[#e4e4e4] text-[#7c7c7c] text-base rounded-lg outline-none h-9 indent-2"
+                        id="ghiChu"
                     />
                 </div>
                 <div class="w-full flex justify-center items-center h-10">
-                    <button class="w-1/3 h-full px-4 cursor-pointer bg-blue text-white rounded-lg">
+                    <button onclick="addCustomer()" class="w-1/3 h-full px-4 cursor-pointer bg-blue text-white rounded-lg">
                         <p class="text-lg font-medium">Thêm</p>
                     </button>
                 </div>
