@@ -10,6 +10,7 @@
         <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
         <link href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
         <script src="https://cdn.tailwindcss.com"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js" integrity="sha512-v2CJ7UaYy4JwqLDIrZUI/4hqeoQieOmAZNXBeQyjo21dadnwR+8ZaIJVT8EE2iyI61OV8e6M8PP2/4hpQINQ/g==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
         <title>RENTBIK</title>
     </head>
     <style>
@@ -85,6 +86,7 @@
                     <div class="w-1/3">
                         <p class="text-base font-medium">Mã bảo hiểm xe</p>
                         <input 
+                            id="maBh"
                             type="text"
                             disabled
                             class="mt-1 w-full h-12 text-base bg-[#e4e4e4] text-black rounded-lg outline-none placeholder-black indent-3"
@@ -93,6 +95,7 @@
                     <div class="w-1/3">
                         <p class="text-base font-medium">Ngày hết hạn</p>
                         <input 
+                            id="ngayHetHan"
                             type="text"
                             disabled
                             class="mt-1 w-full h-12 text-base bg-[#e4e4e4] text-black rounded-lg outline-none placeholder-black indent-3"
@@ -168,5 +171,5 @@
         }
         ;
     </script>
-    <script src="../js/insurance.js"></script>
+    <script src="../js/insurance_v1.js"></script>
 </html>

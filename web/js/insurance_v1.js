@@ -1,3 +1,15 @@
+$(document).ready(function(){
+   $("#btnTraCuu").on("click", function(){
+      var bienSoXe = $("#bienSoXe").val();
+      if (bienSoXe !== ""){
+          getMaBhByBienSoXe(bienSoXe);
+      }else{
+          alert("Hãy nhập biển số xe");
+      }
+   });
+   getInsurances();
+});
+
 function showAddCar(){
     var addCar = document.getElementById('addCar');
     addCar.classList.toggle("hidden");
@@ -107,4 +119,21 @@ async function addInsurance(){
     .catch(err => console.log(err));
 }
 
-getInsurances();
+async function getMaBhByBienSoXe(searchInput){
+    $.ajax({
+        url: 'http://localhost:8080/api/v1/cars',
+        method: 'GET',
+        contentType: 'application/json',
+        success: function(data) {
+            data.forEach(car => {
+                if (car.insurance !== null && car.licensePlate === searchInput){
+                    $("#maBh").val(car.insurance.mabh);
+                    $("#ngayHetHan").val(car.insurance.expiredDate);
+                }
+            });
+        },
+        error: function(xhr, status, error) {
+            console.error('Error fetching data:', error);
+        }
+    });
+}
