@@ -66,9 +66,8 @@ async function addInsurance(){
         location.reload();
     });
 }
-
 // Lấy danh sách bảo hiểm
-async function getInsurances(){
+ function getInsurances(){
     fetch('http://localhost:8080/api/v1/insurances',{
         method: "GET",
         headers: {
@@ -77,7 +76,6 @@ async function getInsurances(){
     })
     .then(res => res.json())
     .then(data => {
-        console.log(data);
         const tableBody = document.getElementById('tableInsurance');
         
         data.forEach(item => {
@@ -91,7 +89,9 @@ async function getInsurances(){
                 if (!item[prop]){
                     cell.textContent = "Không có";
                 }else{
-                    if (prop === 'purchaseDate' || prop === 'expiredDate'){
+                    if (prop === 'car'){
+                        cell.textContent = item[prop].licensePlate;
+                    }else if (prop === 'purchaseDate' || prop === 'expiredDate'){
                         const formattedDate = new Date(item[prop]).toLocaleDateString('en-GB');
                         cell.textContent = formattedDate;
                     }else{

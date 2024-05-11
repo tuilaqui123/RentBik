@@ -73,12 +73,13 @@
                     <div class="w-11/12 relative flex items-center">
                         <i class="fa-solid fa-magnifying-glass absolute ml-5 text-lg "></i>
                         <input 
+                            id="searchInput"
                             type="text"
                             placeholder="Tìm kiếm"
                             class=" w-full h-full pl-14 text-lg bg-[#F4EBD9] text-black rounded-lg outline-none placeholder-black"
                             />
                     </div>
-                    <button class="w-28 p-3 cursor-pointer bg-blue text-white rounded-lg">
+                    <button id="btnSearch" class="w-28 p-3 cursor-pointer bg-blue text-white rounded-lg">
                         <i class="fa-solid fa-magnifying-glass"></i>
                     </button>
                 </div>
@@ -151,31 +152,7 @@
                         </th>
                     </tr>
                 </thead>
-                <tbody>
-                    <tr class="bg-bone border-b  ">
-                        <th scope="row" class="px-6 py-4 font-normal">
-                            1
-                        </th>
-                        <td class="px-6 py-4">
-                            59G3-020.87
-                        </td>
-                        <td class="px-6 py-4">
-                            Cho thuê
-                        </td>
-                        <td class="px-6 py-4">
-                            Xe máy
-                        </td>
-                        <td class="px-6 py-4">
-                            Air Blade
-                        </td>
-                        <td class="px-6 py-4">
-                            150.000
-                        </td>
-                        <td class="px-6 py-4">
-                            Không có
-                        </td>
-                    </tr>
-                    
+                <tbody id="tableCar">
                     
                 </tbody>
             </table>
@@ -198,30 +175,21 @@
                 </div>
                 <div class="mb-4">
                     <p class="font-medium mb-1">Loại xe</p>
-                    <input 
-                        type="text"
-                        placeholder="Loại xe"
-                        class="w-full bg-[#e4e4e4] text-[#7c7c7c] text-base rounded-lg outline-none h-9 indent-2"
-                        id="loaiXe"
-                    />
+                    <select id="selectedType" class="border border-gray-300 rounded-lg h-9 text-black w-full cursor-pointer bg-[#e4e4e4]">
+                        
+                    </select>
                 </div>
                 <div class="mb-4">
                     <p class="font-medium mb-1">Tên hãng</p>
-                    <input 
-                        type="text"
-                        placeholder="Họ và tên"
-                        class="w-full bg-[#e4e4e4] text-[#7c7c7c] text-base rounded-lg outline-none h-9 indent-2"
-                        id="tenHang"
-                    />
+                    <select id="selectedBrand" class="border border-gray-300 rounded-lg h-9 text-black w-full cursor-pointer bg-[#e4e4e4]">
+                        
+                    </select>
                 </div>
                 <div class="mb-4">
                     <p class="font-medium mb-1">Dòng xe</p>
-                    <input 
-                        type="text"
-                        placeholder="Số điện thoại"
-                        class="w-full bg-[#e4e4e4] text-[#7c7c7c] text-base rounded-lg outline-none h-9 indent-2"
-                        id="dongXe"
-                    />
+                    <select id="selectedSeries" class="border border-gray-300 rounded-lg h-9 text-black w-full cursor-pointer bg-[#e4e4e4]">
+                        
+                    </select>
                 </div>
                 
                 <div class="mb-4">
@@ -244,16 +212,15 @@
                 <div class="mb-4 flex">
                     <div class="mr-2">
                         <p class="font-medium mb-1">Mã bảo hiểm (nếu có)</p>
-                        <input 
-                            type="text"
-                            class="w-full bg-[#e4e4e4] text-[#7c7c7c] text-base rounded-lg outline-none h-9 indent-2"
-                            id="maBH"
-                        />
+                        <select id="selectedInsurance" class="border border-gray-300 rounded-lg h-9 text-black w-full cursor-pointer bg-[#e4e4e4]">
+                        
+                        </select>
                     </div>
                     <div class="w-[50%]">
                         <p class="font-medium mb-1">Ngày hết hạn</p>
                         <input 
                             type="date"
+                            disabled
                             class="w-full bg-[#e4e4e4] text-[#7c7c7c] text-base rounded-lg outline-none h-9 indent-2"
                             id="ngayHetHan"
                         />
@@ -268,7 +235,7 @@
                     />
                 </div>
                 <div class="w-full flex justify-center items-center h-10">
-                    <button class="w-1/3 h-full px-4 cursor-pointer bg-blue text-white rounded-lg">
+                    <button onclick="addCar()" class="w-1/3 h-full px-4 cursor-pointer bg-blue text-white rounded-lg">
                         <p class="text-lg font-medium">Thêm</p>
                     </button>
                 </div>
@@ -313,7 +280,7 @@
                     <i class="fa-solid fa-x text-lg font-black cursor-pointer hover:text-[#ff0000]" onclick="showAddSeries()"></i>
                 </div>
                 <div class="mb-4 flex justify-center items-center">
-                    <i id="iconThemTenHang" class="fa-solid fa-plus mr-2 text-lg text-gray-400 cursor-pointer hover:text-[#ff0000]"></i>
+                    <i id="iconThemDongXe" class="fa-solid fa-plus mr-2 text-lg text-gray-400 cursor-pointer hover:text-[#ff0000]"></i>
                     <input 
                         type="text"
                         placeholder="Thêm dòng xe"
@@ -322,7 +289,7 @@
                     />
                 </div> 
                 <div class="mb-4 flex justify-center items-center">
-                    <i id="iconTimTenHang" class="fa-solid fa-search mr-2 text-lg text-gray-400 cursor-pointer hover:text-[#ff0000]"></i>
+                    <i id="iconTimDongXe" class="fa-solid fa-search mr-2 text-lg text-gray-400 cursor-pointer hover:text-[#ff0000]"></i>
                     <input 
                         type="text"
                         placeholder="Tìm tên dòng xe"
@@ -330,7 +297,7 @@
                         id="tenDongXe"
                     />
                 </div>
-                <div id="listBrand">
+                <div id="listSeries">
                 </div>
             </div>
         </div>

@@ -72,11 +72,12 @@
                         <p class="text-base font-medium">Biển số xe</p>
                         <div class="flex flex-row items-center mt-1 w-full gap-4">
                             <input 
+                                id="bienSoXe"
                                 type="text"
                                 placeholder="Biển số xe"
                                 class="w-full h-12 text-base bg-[#F4EBD9] text-black rounded-lg outline-none placeholder-black indent-3  "
                                 />
-                            <button class="flex flex-row items-center w-auto h-12 p-3 px-4 cursor-pointer bg-blue text-white rounded-lg">
+                            <button id="btnTraCuu" class="flex flex-row items-center w-auto h-12 p-3 px-4 cursor-pointer bg-blue text-white rounded-lg">
                                 <i class="fa-solid fa-arrow-right"></i>
                             </button>
                         </div>
