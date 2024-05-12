@@ -10,6 +10,7 @@
         <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
         <link href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
         <script src="https://cdn.tailwindcss.com"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js" integrity="sha512-v2CJ7UaYy4JwqLDIrZUI/4hqeoQieOmAZNXBeQyjo21dadnwR+8ZaIJVT8EE2iyI61OV8e6M8PP2/4hpQINQ/g==" crossorigin="anonymous" referrerpolicy="no-referrer"> </script>
         <title>RENTBIK</title>
     </head>
     <style>
@@ -64,12 +65,13 @@
                 <div class="w-11/12 relative flex items-center">
                     <i class="fa-solid fa-magnifying-glass absolute ml-5 text-lg "></i>
                     <input 
+                        id="searchInput"
                         type="text"
                         placeholder="Tìm kiếm"
                         class=" w-full h-full pl-14 text-lg bg-[#F4EBD9] text-black rounded-lg outline-none placeholder-black"
                         />
                 </div>
-                <button class="w-28 p-3 cursor-pointer bg-blue text-white rounded-lg">
+                <button id="btnSearch" class="w-28 p-3 cursor-pointer bg-blue text-white rounded-lg">
                     <i class="fa-solid fa-magnifying-glass"></i>
                 </button>
             </div>
@@ -106,24 +108,8 @@
                         </th>
                     </tr>
                 </thead>
-                <tbody>
-                    <tr class="bg-bone border-b  ">
-                        <th scope="row" class="px-6 py-4 font-normal">
-                            BT01
-                        </th>
-                        <td class="px-6 py-4">
-                            59G3-020.87
-                        </td>
-                        <td class="px-6 py-4">
-                            12/34/56
-                        </td>
-                        <td class="px-6 py-4">
-                            Chưa thanh toán
-                        </td>
-                        <td class="px-6 py-4">
-                            Không có
-                        </td>
-                    </tr>
+                <tbody id="tableMaintenance">
+
                 </tbody>
             </table>
         </div>
@@ -145,4 +131,5 @@
         ;
 
     </script>
+    <script src="../js/repair.js"></script>
 </html>

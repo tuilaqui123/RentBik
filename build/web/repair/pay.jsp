@@ -10,6 +10,7 @@
         <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
         <link href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
         <script src="https://cdn.tailwindcss.com"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js" integrity="sha512-v2CJ7UaYy4JwqLDIrZUI/4hqeoQieOmAZNXBeQyjo21dadnwR+8ZaIJVT8EE2iyI61OV8e6M8PP2/4hpQINQ/g==" crossorigin="anonymous" referrerpolicy="no-referrer"> </script>
         <title>RENTBIK</title>
     </head>
     <style>
@@ -67,11 +68,12 @@
                         <p class="text-base font-medium">Biển số xe</p>
                         <div class="flex flex-row items-center mt-1 w-full gap-4">
                             <input 
+                                id="bienSoXe"
                                 type="text"
                                 placeholder="Biển số xe"
                                 class="w-full h-12 text-base bg-[#F4EBD9] text-black rounded-lg outline-none placeholder-black indent-3  "
                                 />
-                            <button class="flex flex-row items-center w-auto h-12 p-3 px-4 cursor-pointer bg-blue text-white rounded-lg">
+                            <button id="btnTraCuu" class="flex flex-row items-center w-auto h-12 p-3 px-4 cursor-pointer bg-blue text-white rounded-lg">
                                 <i class="fa-solid fa-arrow-right"></i>
                             </button>
                         </div>
@@ -79,6 +81,7 @@
                     <div class="w-1/4">
                         <p class="text-base font-medium">Loại xe</p>
                         <input 
+                            id="loaiXe"
                             type="text"
                             disabled
                             class="mt-1 w-full h-12 text-base bg-[#e4e4e4] text-black rounded-lg outline-none placeholder-black indent-3"
@@ -87,6 +90,7 @@
                     <div class="w-1/4">
                         <p class="text-base font-medium">Tên hãng</p>
                         <input 
+                            id="tenHang"
                             type="text"
                             disabled
                             class="mt-1 w-full h-12 text-base bg-[#e4e4e4] text-black rounded-lg outline-none placeholder-black indent-3"
@@ -95,6 +99,7 @@
                     <div class="w-1/4">
                         <p class="text-base font-medium">Dòng xe</p>
                         <input 
+                            id="dongXe"
                             type="text"
                             disabled
                             class="mt-1 w-full h-12 text-base bg-[#e4e4e4] text-black rounded-lg outline-none placeholder-black indent-3"
@@ -138,24 +143,8 @@
                                 </th>
                             </tr>
                         </thead>
-                        <tbody>
-                            <tr class="bg-bone border-b  ">
-                                <th scope="row" class="px-6 py-4 font-normal">
-                                    BT01
-                                </th>
-                                <td class="px-6 py-4">
-                                    59G3-020.87
-                                </td>
-                                <td class="px-6 py-4">
-                                    12/34/56
-                                </td>
-                                <td class="px-6 py-4">
-                                    150.000
-                                </td>
-                                <td class="px-6 py-4">
-                                    Không có
-                                </td>
-                            </tr>
+                        <tbody id="tableMaintenance">
+                            
                         </tbody>
                     </table>
                 </div>
@@ -215,4 +204,5 @@
         ;
 
     </script>
+    <script src="../js/pay.js"></script>
 </html>
