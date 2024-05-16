@@ -159,6 +159,7 @@
                         <div class="w-1/3">
                             <p class="text-base font-medium">Mã bảo trì</p>
                             <input 
+                                id="maBaoTri"
                                 type="text"
                                 class="mt-1 w-full h-12 text-base  text-black rounded-lg outline-none placeholder-black px-3"
                                 />
@@ -166,6 +167,7 @@
                         <div class="w-1/3">
                             <p class="text-base font-medium">Ngày thanh toán</p>
                             <input 
+                                id="ngayThanhToan"
                                 type="date"
                                 class="mt-1 w-full h-12 text-base  text-black rounded-lg outline-none placeholder-black px-3"
                                 />
@@ -173,13 +175,14 @@
                         <div class="w-1/3">
                             <p class="text-base font-medium">Số tiền</p>
                             <input 
+                                id="soTien"
                                 type="text"
                                 class="mt-1 w-full h-12 text-base  text-black rounded-lg outline-none placeholder-black px-3"
                                 />
                         </div>
                     </div>
                     <div class="w-full mt-5 flex justify-center">
-                        <button class="h-12 w-1/6 cursor-pointer bg-blue text-white  rounded-lg">
+                        <button onclick="paymentMaintenance()" class="h-12 w-1/6 cursor-pointer bg-blue text-white  rounded-lg">
                             <p class="font-medium text-xl">Thêm</p>
                         </button>
                     </div>
@@ -204,5 +207,5 @@
         ;
 
     </script>
-    <script src="../js/pay.js"></script>
+    <script src="../js/pay_v1.js"></script>
 </html>

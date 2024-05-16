@@ -74,3 +74,66 @@ function getMaintenanceNoPayment(){
     })
     .catch(err => console.log(err));
 }
+
+// Thanh toán bảo trì
+async function paymentMaintenance(){
+    var maBaoTri = document.getElementById("maBaoTri").value;
+    var ngayThanhToan = document.getElementById("ngayThanhToan").value;
+    var soTien = document.getElementById("soTien").value;
+    
+    if (maBaoTri === ""){
+        alert("Vui lòng nhập mã bảo trì");
+        return;
+    }
+    
+    if (ngayThanhToan === ""){
+        alert("Vui lòng chọn ngày thanh toán");
+        return;
+    }
+    
+    if (soTien === ""){
+        alert("Vui lòng nhập số tiền thanh toán");
+        return;
+    }
+    
+    if (isNaN(maBaoTri)){
+        alert("Mã bảo trì phải là giá trị số");
+        return;
+    }
+    
+    if (isNaN(soTien)){
+        alert("Tiền phải là giá trị số");
+        return;
+    }
+    
+    fetch('http://localhost:8080/api/v1/maintenances/pay',{
+        method: "POST",
+        headers: {
+            'Accept': 'application/json',
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({
+            maintenanceId: maBaoTri,
+            paymentDate: ngayThanhToan,
+            price: soTien
+        })
+    })
+    .then((res) => res.json())
+    .then(data => {
+        if (data.message === "Maintenance is don't exists"){
+            alert("Mã bảo trì không tồn tại");
+            return;
+        }
+        
+        if (data.message === "Payment price should not bigger than maintenance price"){
+            alert("Giá thanh toán không được lớn hơn giá bảo trì");
+            return;
+        }
+        
+        alert("Thanh toán bảo trì thành công");
+    })
+    .catch(err => console.log(err))
+    .finally(async () => {
+        location.reload();
+    });
+}

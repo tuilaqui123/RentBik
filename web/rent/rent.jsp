@@ -10,6 +10,7 @@
         <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
         <link href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
         <script src="https://cdn.tailwindcss.com"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js" integrity="sha512-v2CJ7UaYy4JwqLDIrZUI/4hqeoQieOmAZNXBeQyjo21dadnwR+8ZaIJVT8EE2iyI61OV8e6M8PP2/4hpQINQ/g==" crossorigin="anonymous" referrerpolicy="no-referrer"> </script>
         <title>RENTBIK</title>
     </head>
     <style>
@@ -73,12 +74,13 @@
                         <p class="text-base font-medium">SỐ CCCD</p>
                         <div class="flex flex-row items-center mt-1 w-full gap-4">
                             <input 
+                                id="cccd"
                                 type="text"
                                 placeholder="CCCD"
                                 class="w-full h-12 text-base bg-[#F4EBD9] text-black rounded-lg outline-none placeholder-black indent-3  "
                                 />
                             <button
-                                onclick="showCustomerInfo()"
+                                id="btnGetByCCCD"
                                 class="flex flex-row items-center w-auto h-12 p-3 px-4 cursor-pointer bg-blue text-white rounded-lg">
                                 <i class="fa-solid fa-arrow-right"></i>
                             </button>
@@ -90,10 +92,10 @@
         <!--        customer infomation-->
         <div class="mb-5 flex flex-col w-full h-auto items-center justify-start pt-5 hidden" id="customerInfo">
             <div class="w-11/12 flex flex-row justify-between p-5 border rounded-lg bg-[#F4EBD9] border-black">
-                <p>Họ tên: <b>Phạm Ngọc Qúi</b></p>
-                <p>Ngày sinh: <b>17/08/2003</b></p>
-                <p>Số điện thoại: <b>0912725561</b></p>
-                <p>GPLX: <b>B1</b></p>
+                <p>Họ tên: <b id="nameCustomer">Phạm Ngọc Qúi</b></p>
+                <p>Ngày sinh: <b id="birthdayCustomer">17/08/2003</b></p>
+                <p>Số điện thoại: <b id="phoneCustomer">0912725561</b></p>
+                <p>GPLX: <b id="gplxCustomer">B1</b></p>
             </div>
             <!--            car renting-->
             <div class="flex flex-col w-full h-auto items-center justify-start pt-10">
@@ -202,12 +204,13 @@
                             <div class="w-full relative flex items-center">
                                 <i class="fa-solid fa-magnifying-glass absolute ml-5 text-lg "></i>
                                 <input 
+                                    id="searchInput"
                                     type="text"
                                     placeholder="Tìm kiếm"
                                     class=" w-full h-full pl-14 text-lg bg-[#F4EBD9] text-black rounded-lg outline-none placeholder-black"
                                     />
                             </div>
-                            <button class="w-28 p-3 cursor-pointer bg-blue text-white rounded-lg">
+                            <button id="btnSearch" class="w-28 p-3 cursor-pointer bg-blue text-white rounded-lg">
                                 <i class="fa-solid fa-magnifying-glass"></i>
                             </button>
                         </div>
@@ -240,7 +243,7 @@
                                     </th>
                                     <th scope="col" class="px-6 py-3">
                                         <div class="flex items-center">
-                                            Giá tiền
+                                            Giá thuê
                                             <a href="#"><svg class="w-3 h-3 ms-1.5" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 24 24">
                                                     <path d="M8.574 11.024h6.852a2.075 2.075 0 0 0 1.847-1.086 1.9 1.9 0 0 0-.11-1.986L13.736 2.9a2.122 2.122 0 0 0-3.472 0L6.837 7.952a1.9 1.9 0 0 0-.11 1.986 2.074 2.074 0 0 0 1.847 1.086Zm6.852 1.952H8.574a2.072 2.072 0 0 0-1.847 1.087 1.9 1.9 0 0 0 .11 1.985l3.426 5.05a2.123 2.123 0 0 0 3.472 0l3.427-5.05a1.9 1.9 0 0 0 .11-1.985 2.074 2.074 0 0 0-1.846-1.087Z"/>
                                                 </svg></a>
@@ -248,28 +251,12 @@
                                     </th>
                                 </tr>
                             </thead>
-                            <tbody class="bg-white">
-                                <tr class="bg-bone border-b cursor-pointer hover:bg-[#d7d9df]">
-                                    <th scope="row" class="px-6 py-4 font-normal">
-                                        1
-                                    </th>
-                                    <td class="px-6 py-4">
-                                        59G3-020.87
-                                    </td>
-                                    <td class="px-6 py-4">
-                                        Xe máy
-                                    </td>
-                                    <td class="px-6 py-4">
-                                        Air Blade
-                                    </td>
-                                    <td class="px-6 py-4">
-                                        150.000
-                                    </td>
-                                </tr>
+                            <tbody class="bg-white" id="tableCar">
+
                             </tbody>
                         </table>
                     </div>
-                    <p class="mt-5 font-bold text-lg">XE ĐÃ CHỌN: 59G3-020.87</p>
+                    <p id="selectCar" class="mt-5 font-bold text-lg">XE ĐÃ CHỌN: CHƯA CHỌN XE</p>
                 </div>
             </div>
             <!--        bill-->
@@ -281,6 +268,7 @@
                             <div class="w-1/4">
                                 <p class="text-base font-medium">Họ tên</p>
                                 <input 
+                                    id="hoTen"
                                     type="text"
                                     placeholder="Phạm Ngọc Qúi"
                                     disabled
@@ -290,6 +278,7 @@
                             <div class="w-1/4">
                                 <p class="text-base font-medium">Ngày sinh</p>
                                 <input 
+                                    id="ngaySinh"
                                     type="text"
                                     placeholder="17/08/2003"
                                     disabled
@@ -299,6 +288,7 @@
                             <div class="w-1/4">
                                 <p class="text-base font-medium">Số điện thoại</p>
                                 <input 
+                                    id="soDienThoai"
                                     type="text"
                                     placeholder="0912725561"
                                     disabled
@@ -308,6 +298,7 @@
                             <div class="w-1/4">
                                 <p class="text-base font-medium">GPLX</p>
                                 <input 
+                                    id="gplx"
                                     type="text"
                                     placeholder="B1"
                                     disabled
@@ -320,15 +311,19 @@
                             <div class="w-1/3">
                                 <p class="text-base font-medium">Biển số xe</p>
                                 <input 
+                                    id="bienSoXe"
                                     type="text"
-                                    class="mt-1 w-full h-12 text-base  text-black rounded-lg outline-none placeholder-black px-3"
+                                    placeholder="Biển số xe"
+                                    disabled
+                                    class="mt-1 w-full h-12 text-base bg-white  text-black rounded-lg outline-none placeholder-black px-3"
                                     />
                             </div>
                             <div class="w-1/3">
                                 <p class="text-base font-medium">Loại xe</p>
                                 <input 
+                                    id="loaiXe"
                                     type="text"
-                                    placeholder="Xe máy"
+                                    placeholder="Loại xe"
                                     disabled
                                     class="mt-1 w-full h-12 text-base bg-white  text-black rounded-lg outline-none placeholder-black px-3"
                                     />
@@ -336,8 +331,9 @@
                             <div class="w-1/3">
                                 <p class="text-base font-medium">Dòng xe</p>
                                 <input 
+                                    id="dongXe"
                                     type="text"
-                                    placeholder="Air Blade"
+                                    placeholder="Dòng xe"
                                     disabled
                                     class="mt-1 w-full h-12 text-base bg-white  text-black rounded-lg outline-none placeholder-black px-3"
                                     />
@@ -396,5 +392,5 @@
         ;
 
     </script>
-    <script src="../js/app.js"></script>
+    <script src="../js/rent_v1.js"></script>
 </html>
