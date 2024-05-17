@@ -165,17 +165,6 @@
                         <select id="selectedGplx" class="border border-gray-300 rounded-lg h-10 text-black w-full cursor-pointer bg-[#e4e4e4]">
                         
                         </select>
-<!--                        <input 
-                            type="text"
-                            placeholder="Hạng"
-                            class="w-1/2 bg-[#e4e4e4] text-[#7c7c7c] text-base rounded-lg outline-none h-9 indent-2"
-                            id="gplx"
-                        />
-                        <input 
-                            type="text"
-                            placeholder="Mã"
-                            class="w-1/2 bg-[#e4e4e4] text-[#7c7c7c] text-base rounded-lg outline-none h-9 indent-2"
-                        />-->
                     </div>
 
                 </div>
@@ -212,5 +201,5 @@
         ;
 
     </script>
-    <script src="../js/app.js"></script>
+    <script src="../js/app_v2.js"></script>
 </html>

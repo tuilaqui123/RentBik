@@ -96,6 +96,10 @@
                         <i class="fa-solid fa-plus mr-2"></i>
                         <p class="font-normal text-base">Thêm dòng xe</p>
                     </button>
+                    <button id="baoHiem" class="flex flex-row items-center w-auto h-12 p-3 px-4 cursor-pointer bg-blue text-white rounded-lg" onclick="showAddInsurance()">
+                        <i class="fa-solid fa-plus mr-2"></i>
+                        <p class="font-normal text-base">Thêm bảo hiểm</p>
+                    </button>
                     <button class="h-12 w-14 cursor-pointer bg-[#e4e4e4] text-[#7c7c7c] text-xl rounded-lg">
                         <i class="fa-solid fa-pen-to-square"></i>
                     </button>
@@ -301,6 +305,37 @@
                 </div>
             </div>
         </div>
+        
+        <div class="w-full h-screen absolute top-0 flex items-center justify-center hidden" id="addInsurance">
+            <div class="absolute w-full h-[100vh] bg-gray-400 opacity-75"></div>
+            <div class="z-10 w-1/3 h-4/5 h-auto bg-white relative z-10 rounded-lg px-5 py-7 shadow-lg shadow-black">
+                <div class="flex flex-row justify-between items-center mb-7">
+                    <p class="text-xl font-medium">THÊM BẢO HIỂM</p>
+                    <i class="fa-solid fa-x text-lg font-black cursor-pointer hover:text-[#ff0000]" onclick="showAddInsurance()"></i>
+                </div>
+                <div class="mb-4">
+                    <div class="mr-2">
+                        <p class="font-medium mb-1">Biển số xe</p>
+                        <select id="selectedBSX" class="border border-gray-300 rounded-lg h-9 text-black w-full cursor-pointer bg-[#e4e4e4]">
+                        
+                        </select>
+                    </div>
+                </div>
+                <div class="mb-4">
+                    <div class="mr-2">
+                        <p class="font-medium mb-1">Mã bảo hiểm</p>
+                        <select id="selectedInsuranceForBSX" class="border border-gray-300 rounded-lg h-9 text-black w-full cursor-pointer bg-[#e4e4e4]">
+
+                        </select>
+                    </div>
+                </div>
+                <div class="w-full flex justify-center items-center h-10">
+                    <button onclick="addInsuranceForExistCar()" class="w-1/3 h-full px-4 cursor-pointer bg-blue text-white rounded-lg">
+                        <p class="text-lg font-medium">Thêm</p>
+                    </button>
+                </div>
+            </div>
+        </div>
     </body>
     <script>
         tailwind.config = {
@@ -319,5 +354,5 @@
         ;
 
     </script>
-    <script src="../js/garage.js"></script>
+    <script src="../js/garage_v1.js"></script>
 </html>

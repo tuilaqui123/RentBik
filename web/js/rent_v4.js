@@ -1,6 +1,5 @@
 $(document).ready(function(){
     $("#btnGetByCCCD").click(function(){
-        var customerInfo = document.getElementById('customerInfo');
         var cccd = document.getElementById("cccd").value;
 
         if (cccd === ""){
@@ -41,29 +40,43 @@ async function getCars() {
         .then(data => {
             $("#tableCar").empty();
             const tableBody = document.getElementById('tableCar');
-            data.forEach(item => {
+            
+            if (data.length === 0) {
                 const row = document.createElement('tr');
-                row.classList.add('bg-bone', 'border-b', 'cursor-pointer', 'hover:bg-[#d7d9df]', 'selectedCar');
+                row.classList.add('bg-bone', 'border-b');
 
-                row.id = `${item.licensePlate}`;
+                const cell = document.createElement('td');
+                cell.colSpan = 7;
+                cell.classList.add('px-6', 'py-4', 'font-bold', 'whitespace-nowrap', 'text-center', 'text-[30px]', 'text-[#Ef4444]');
+                cell.textContent = 'Không có dữ liệu';
 
-                const properties = ['id', 'licensePlate', 'type', 'series', 'hirePrice'];
-                properties.forEach(prop => {
-                    if (item.status === "Co san"){
-                        const cell = document.createElement('td');
-                        cell.classList.add('px-6', 'py-4', 'font-normal', 'whitespace-nowrap');
-
-                        if (prop === 'type' || prop === 'series') {
-                            cell.textContent = item[prop].name;
-                        } else {
-                            cell.textContent = item[prop];
-                        }
-                        row.appendChild(cell);
-                    }
-                });
-
+                row.appendChild(cell);
                 tableBody.appendChild(row);
-            });
+            }else{
+                data.forEach(item => {
+                    const row = document.createElement('tr');
+                    row.classList.add('bg-bone', 'border-b', 'cursor-pointer', 'hover:bg-[#d7d9df]', 'selectedCar');
+
+                    row.id = `${item.licensePlate}`;
+
+                    const properties = ['id', 'licensePlate', 'type', 'series', 'hirePrice'];
+                    properties.forEach(prop => {
+                        if (item.status === "Co san"){
+                            const cell = document.createElement('td');
+                            cell.classList.add('px-6', 'py-4', 'font-normal', 'whitespace-nowrap');
+
+                            if (prop === 'type' || prop === 'series') {
+                                cell.textContent = item[prop].name;
+                            } else {
+                                cell.textContent = item[prop];
+                            }
+                            row.appendChild(cell);
+                        }
+                    });
+
+                    tableBody.appendChild(row);
+                });
+            }
             
             $(".selectedCar").on('click', function(){
                 var licensePlate = $(this).attr('id');
@@ -93,27 +106,40 @@ async function getCarsBySearch(searchInput){
         $("#tableCar").empty();
         const tableBody = document.getElementById('tableCar');
         
-        data.forEach(item => {
+        if (data.length === 0) {
             const row = document.createElement('tr');
-            row.classList.add('bg-bone', 'border-b', 'cursor-pointer', 'hover:bg-[#d7d9df]', 'selectedCar');
+            row.classList.add('bg-bone', 'border-b');
 
-            row.id = `${item.licensePlate}`;
+            const cell = document.createElement('td');
+            cell.colSpan = 7;
+            cell.classList.add('px-6', 'py-4', 'font-bold', 'whitespace-nowrap', 'text-center', 'text-[30px]', 'text-[#Ef4444]');
+            cell.textContent = 'Không có dữ liệu';
 
-            const properties = ['id', 'licensePlate', 'type', 'series', 'hirePrice'];
-            properties.forEach(prop => {
-                const cell = document.createElement('td');
-                cell.classList.add('px-6', 'py-4', 'font-normal', 'whitespace-nowrap');
-
-                if (prop === 'type' || prop === 'series'){
-                    cell.textContent = item[prop].name;
-                }else{
-                    cell.textContent = item[prop];
-                }
-                row.appendChild(cell);
-            });
-
+            row.appendChild(cell);
             tableBody.appendChild(row);
-        });
+        }else{
+            data.forEach(item => {
+                const row = document.createElement('tr');
+                row.classList.add('bg-bone', 'border-b', 'cursor-pointer', 'hover:bg-[#d7d9df]', 'selectedCar');
+
+                row.id = `${item.licensePlate}`;
+
+                const properties = ['id', 'licensePlate', 'type', 'series', 'hirePrice'];
+                properties.forEach(prop => {
+                    const cell = document.createElement('td');
+                    cell.classList.add('px-6', 'py-4', 'font-normal', 'whitespace-nowrap');
+
+                    if (prop === 'type' || prop === 'series'){
+                        cell.textContent = item[prop].name;
+                    }else{
+                        cell.textContent = item[prop];
+                    }
+                    row.appendChild(cell);
+                });
+
+                tableBody.appendChild(row);
+            });
+        }
         
         $(".selectedCar").on('click', function(){
             var licensePlate = $(this).attr('id');
@@ -194,32 +220,45 @@ async function getCustomers(cccd){
         $("#tableHiringCar").empty();
         const tableBody = document.getElementById('tableHiringCar');
         
-        data.rents.forEach(item => {
+        if (data.rents.length === 0) {
             const row = document.createElement('tr');
             row.classList.add('bg-bone', 'border-b');
 
-            const properties = ['id', 'licensePlate', 'type', 'series', 'hirePrice', 'rentalDate', 'expiryDate'];
-            properties.forEach(prop => {
-                var objCar = item.car;
-                if (objCar){
-                    const cell = document.createElement('td');
-                    cell.classList.add('px-6', 'py-4', 'font-normal', 'whitespace-nowrap');
+            const cell = document.createElement('td');
+            cell.colSpan = 7;
+            cell.classList.add('px-6', 'py-4', 'font-bold', 'whitespace-nowrap', 'text-center', 'text-[30px]', 'text-[#Ef4444]');
+            cell.textContent = 'Không có dữ liệu';
 
-                    if (prop === 'type' || prop === 'series'){
-                        cell.textContent = objCar[prop].name;
-                    }else if (prop === 'rentalDate' || prop === 'expiryDate'){
-                        const formattedDate = new Date(item[prop]).toLocaleDateString('en-GB');
-                        cell.textContent = formattedDate;
-                    }else{
-                        cell.textContent = objCar[prop];
-                    }
-                    
-                    row.appendChild(cell);
-                }
-            });
-
+            row.appendChild(cell);
             tableBody.appendChild(row);
-        });
+        }else{
+            data.rents.forEach(item => {
+                const row = document.createElement('tr');
+                row.classList.add('bg-bone', 'border-b');
+
+                const properties = ['id', 'licensePlate', 'type', 'series', 'hirePrice', 'rentalDate', 'expiryDate'];
+                properties.forEach(prop => {
+                    var objCar = item.car;
+                    if (objCar){
+                        const cell = document.createElement('td');
+                        cell.classList.add('px-6', 'py-4', 'font-normal', 'whitespace-nowrap');
+
+                        if (prop === 'type' || prop === 'series'){
+                            cell.textContent = objCar[prop].name;
+                        }else if (prop === 'rentalDate' || prop === 'expiryDate'){
+                            const formattedDate = new Date(item[prop]).toLocaleDateString('en-GB');
+                            cell.textContent = formattedDate;
+                        }else{
+                            cell.textContent = objCar[prop];
+                        }
+
+                        row.appendChild(cell);
+                    }
+                });
+
+                tableBody.appendChild(row);
+            });
+        }
         
         document.getElementById("nameCustomer").innerHTML = data.fullname;
         const formattedDate = new Date(data.birthday).toLocaleDateString('en-GB');

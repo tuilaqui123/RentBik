@@ -3,8 +3,10 @@ $(document).ready(function(){
     getSeries();
     getTypes();
     getInsurances();
+    getInsurancesForBSX();
     getCars();
-
+    getBienSoXeWithNoInsurance();
+    
     $("#iconThemTenHang").on('click', function(){
         addBrand();
     });
@@ -53,6 +55,11 @@ function showAddBrand(){
 function showAddSeries(){
     var addSeries = document.getElementById('addSeries');
     addSeries.classList.toggle("hidden");
+}
+
+function showAddInsurance(){
+    var addInsurance = document.getElementById('addInsurance');
+    addInsurance.classList.toggle("hidden");
 }
 
 // Lấy danh sách hãng xe
@@ -401,25 +408,39 @@ async function getCars(){
     .then(data => {
         const tableBody = document.getElementById('tableCar');
         
-        data.forEach(item => {
+        if (data.length === 0) {
             const row = document.createElement('tr');
             row.classList.add('bg-bone', 'border-b');
-            
-            const properties = ['id', 'licensePlate', 'status', 'type', 'series', 'hirePrice', 'carNote'];
-            properties.forEach(prop => {
-                const cell = document.createElement('td');
-                cell.classList.add('px-6', 'py-4', 'font-normal', 'whitespace-nowrap');
-                
-                if (prop === 'type' || prop === 'series'){
-                    cell.textContent = item[prop].name;
-                }else{
-                    cell.textContent = item[prop];
-                }
-                row.appendChild(cell);
-            });
 
+            const cell = document.createElement('td');
+            cell.colSpan = 7;
+            cell.classList.add('px-6', 'py-4', 'font-bold', 'whitespace-nowrap', 'text-center', 'text-[30px]', 'text-[#Ef4444]');
+            cell.textContent = 'Không có dữ liệu';
+
+            row.appendChild(cell);
             tableBody.appendChild(row);
-        });
+        }else{
+            data.forEach(item => {
+                const row = document.createElement('tr');
+                row.classList.add('bg-bone', 'border-b');
+
+                const properties = ['id', 'licensePlate', 'status', 'type', 'series', 'hirePrice', 'carNote'];
+                properties.forEach(prop => {
+                    const cell = document.createElement('td');
+                    cell.classList.add('px-6', 'py-4', 'font-normal', 'whitespace-nowrap');
+
+                    if (prop === 'type' || prop === 'series'){
+                        cell.textContent = item[prop].name;
+                    }else{
+                        cell.textContent = item[prop];
+                    }
+                    row.appendChild(cell);
+                });
+
+                tableBody.appendChild(row);
+            });
+        }
+        
     })
     .catch(err => console.log(err));
 }
@@ -437,25 +458,138 @@ async function getCarsBySearch(searchInput){
         $("#tableCar").empty();
         const tableBody = document.getElementById('tableCar');
         
-        data.forEach(item => {
+        if (data.length === 0) {
             const row = document.createElement('tr');
             row.classList.add('bg-bone', 'border-b');
-            
-            const properties = ['id', 'licensePlate', 'status', 'type', 'series', 'hirePrice', 'carNote'];
-            properties.forEach(prop => {
-                const cell = document.createElement('td');
-                cell.classList.add('px-6', 'py-4', 'font-normal', 'whitespace-nowrap');
-                
-                if (prop === 'type' || prop === 'series'){
-                    cell.textContent = item[prop].name;
-                }else{
-                    cell.textContent = item[prop];
-                }
-                row.appendChild(cell);
-            });
 
+            const cell = document.createElement('td');
+            cell.colSpan = 7;
+            cell.classList.add('px-6', 'py-4', 'font-bold', 'whitespace-nowrap', 'text-center', 'text-[30px]', 'text-[#Ef4444]');
+            cell.textContent = 'Không có dữ liệu';
+
+            row.appendChild(cell);
             tableBody.appendChild(row);
+        }else{
+            data.forEach(item => {
+                const row = document.createElement('tr');
+                row.classList.add('bg-bone', 'border-b');
+
+                const properties = ['id', 'licensePlate', 'status', 'type', 'series', 'hirePrice', 'carNote'];
+                properties.forEach(prop => {
+                    const cell = document.createElement('td');
+                    cell.classList.add('px-6', 'py-4', 'font-normal', 'whitespace-nowrap');
+
+                    if (prop === 'type' || prop === 'series'){
+                        cell.textContent = item[prop].name;
+                    }else{
+                        cell.textContent = item[prop];
+                    }
+                    row.appendChild(cell);
+                });
+
+                tableBody.appendChild(row);
+            });
+        }
+    })
+    .catch(err => console.log(err));
+}
+
+// Lấy danh sách biển số xe chưa đăng ký bảo hiểm
+async function getBienSoXeWithNoInsurance(){
+    var licensePlates = document.getElementById("selectedBSX");
+    
+    var defaultOption = document.createElement("option");
+    defaultOption.text = "Biển số xe";
+    defaultOption.value = "";
+    defaultOption.selected = true; 
+    defaultOption.disabled = true;
+    licensePlates.appendChild(defaultOption);
+    
+    fetch('http://localhost:8080/api/v1/cars/insuranceNotFound',{
+        method: "GET",
+        headers: {
+            "Content-Type": "application/json"
+        }  
+    })
+    .then(res => res.json())
+    .then(data => {
+        data.forEach(licensePlate => {
+            var optionElement = document.createElement("option");
+            optionElement.text = licensePlate.licensePlate;
+            optionElement.value = licensePlate.id;
+            licensePlates.add(optionElement);
         });
     })
     .catch(err => console.log(err));
+}
+
+// Lấy bảo hiểm trong form thêm bảo hiểm mới
+async function getInsurancesForBSX(){
+    var insurances = document.getElementById("selectedInsuranceForBSX");
+    
+    var defaultOption = document.createElement("option");
+    defaultOption.text = "Mã bảo hiểm";
+    defaultOption.value = "";
+    defaultOption.selected = true; 
+    defaultOption.disabled = true;
+    insurances.appendChild(defaultOption);
+    
+    fetch('http://localhost:8080/api/v1/insurances',{
+        method: "GET",
+        headers: {
+            "Content-Type": "application/json"
+        }  
+    })
+    .then(res => res.json())
+    .then(data => {
+        data.forEach(insurance => {
+            if (!insurance.car){
+                var optionElement = document.createElement("option");
+                optionElement.text = insurance.mabh;
+                optionElement.value = insurance.id;
+                insurances.add(optionElement);
+            }
+        });
+    })
+    .catch(err => console.log(err));
+}
+
+// Thêm bảo hiểm cho xe đã có trong kho
+async function addInsuranceForExistCar(){
+    var selectedBSX = document.getElementById("selectedBSX").value;
+    var selectedInsurance = document.getElementById("selectedInsuranceForBSX").value;
+    
+    if (selectedBSX === ""){
+        alert("Vui lòng chọn biển số xe");
+        return;
+    }
+    
+    if (selectedInsurance === ""){
+        alert("Vui lòng chọn bảo hiểm xe");
+        return;
+    }
+    
+    fetch('http://localhost:8080/api/v1/cars/add_insurance', {
+        method: "POST",
+        headers: {
+            'Accept': 'application/json',
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({
+            carId: selectedBSX,
+            insuranceId: selectedInsurance
+        })
+    })
+    .then((res) => res.json())
+    .then(data => {
+        if (data.message === "Car or insurance not found"){
+            alert("Xe hoặc bảo hiểm không tồn tại");
+            return;
+        }
+        alert("Thêm bảo hiểm thành công");
+    })
+    .catch(err => console.log(err))
+    .finally(() => {
+        location.reload();
+    });
 }

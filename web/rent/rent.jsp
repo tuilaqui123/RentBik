@@ -372,5 +372,5 @@
         ;
 
     </script>
-    <script src="../js/rent_v3.js"></script>
+    <script src="../js/rent_v4.js"></script>
 </html>

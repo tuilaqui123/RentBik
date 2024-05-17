@@ -132,7 +132,7 @@
                         <div class="w-1/3">
                             <p class="text-base font-medium">Ngày hết hạn</p>
                             <input 
-                                id="ngayHetHan"
+                                id="ngayHetHanInput"
                                 type="date"
                                 class="mt-1 w-full h-12 text-base  text-black rounded-lg outline-none placeholder-black px-3"
                                 />
@@ -171,5 +171,5 @@
         }
         ;
     </script>
-    <script src="../js/insurance_v2.js"></script>
+    <script src="../js/insurance_v4.js"></script>
 </html>

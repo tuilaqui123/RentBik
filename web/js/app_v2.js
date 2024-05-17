@@ -1,3 +1,16 @@
+$(document).ready(function(){
+    $("#searchInput").keypress(function(event) {
+        if (event.which === 13) {
+            $("#btnSearch").click();
+        }
+    });
+    $("#btnSearch").on("click", function(){
+        var searchInput = $("#searchInput").val();
+        getCustomersBySearch(searchInput);
+    });
+    getCustomers();
+});
+
 function showCustomerInfo(){
     var customerInfo = document.getElementById('customerInfo');
     customerInfo.classList.toggle("hidden");
@@ -51,28 +64,41 @@ async function getCustomers(){
     .then(data => {
         const tableBody = document.getElementById('tableCustomer');
         
-        data.forEach(item => {
+        if (data.length === 0) {
             const row = document.createElement('tr');
             row.classList.add('bg-bone', 'border-b');
-            
-            const properties = ['id', 'fullname', 'birthday', 'cccd', 'phoneNumber', 'gplxes', 'note'];
-            properties.forEach(prop => {
-                const cell = document.createElement('td');
-                cell.classList.add('px-6', 'py-4', 'font-normal', 'whitespace-nowrap');
-                if (prop === 'birthday') {
-                    const formattedDate = new Date(item[prop]).toLocaleDateString('en-GB');
-                    cell.textContent = formattedDate;
-                } else if (prop === 'gplxes') {
-                    const gplxArray = item[prop].map(gplx => gplx.rank);
-                    cell.textContent = gplxArray.join(', '); 
-                } else {
-                    cell.textContent = item[prop];
-                }
-                row.appendChild(cell);
-            });
 
+            const cell = document.createElement('td');
+            cell.colSpan = 7;
+            cell.classList.add('px-6', 'py-4', 'font-bold', 'whitespace-nowrap', 'text-center', 'text-[30px]', 'text-[#Ef4444]');
+            cell.textContent = 'Không có dữ liệu';
+
+            row.appendChild(cell);
             tableBody.appendChild(row);
-        });
+        }else{
+            data.forEach(item => {
+                const row = document.createElement('tr');
+                row.classList.add('bg-bone', 'border-b');
+
+                const properties = ['id', 'fullname', 'birthday', 'cccd', 'phoneNumber', 'gplxes', 'note'];
+                properties.forEach(prop => {
+                    const cell = document.createElement('td');
+                    cell.classList.add('px-6', 'py-4', 'font-normal', 'whitespace-nowrap');
+                    if (prop === 'birthday') {
+                        const formattedDate = new Date(item[prop]).toLocaleDateString('en-GB');
+                        cell.textContent = formattedDate;
+                    } else if (prop === 'gplxes') {
+                        const gplxArray = item[prop].map(gplx => gplx.rank);
+                        cell.textContent = gplxArray.join(', '); 
+                    } else {
+                        cell.textContent = item[prop];
+                    }
+                    row.appendChild(cell);
+                });
+
+                tableBody.appendChild(row);
+            });
+        }
     })
     .catch(err => console.log(err));
 }
@@ -89,43 +115,45 @@ async function getCustomersBySearch(searchInput){
         $("#tableCustomer").empty();
         const tableBody = document.getElementById('tableCustomer');
         
-        data.forEach(item => {
+        if (data.length === 0) {
             const row = document.createElement('tr');
             row.classList.add('bg-bone', 'border-b');
-            
-            const properties = ['id', 'fullname', 'birthday', 'cccd', 'phoneNumber', 'gplxes', 'note'];
-            properties.forEach(prop => {
-                const cell = document.createElement('td');
-                cell.classList.add('px-6', 'py-4', 'font-normal', 'whitespace-nowrap');
-                if (prop === 'birthday') {
-                    const formattedDate = new Date(item[prop]).toLocaleDateString('en-GB');
-                    cell.textContent = formattedDate;
-                } else if (prop === 'gplxes') {
-                    const gplxArray = item[prop].map(gplx => gplx.rank);
-                    cell.textContent = gplxArray.join(', '); 
-                } else {
-                    cell.textContent = item[prop];
-                }
-                row.appendChild(cell);
-            });
 
+            const cell = document.createElement('td');
+            cell.colSpan = 7;
+            cell.classList.add('px-6', 'py-4', 'font-bold', 'whitespace-nowrap', 'text-center', 'text-[30px]', 'text-[#Ef4444]');
+            cell.textContent = 'Không có dữ liệu';
+
+            row.appendChild(cell);
             tableBody.appendChild(row);
-        });
+        }else{
+            data.forEach(item => {
+                const row = document.createElement('tr');
+                row.classList.add('bg-bone', 'border-b');
+
+                const properties = ['id', 'fullname', 'birthday', 'cccd', 'phoneNumber', 'gplxes', 'note'];
+                properties.forEach(prop => {
+                    const cell = document.createElement('td');
+                    cell.classList.add('px-6', 'py-4', 'font-normal', 'whitespace-nowrap');
+                    if (prop === 'birthday') {
+                        const formattedDate = new Date(item[prop]).toLocaleDateString('en-GB');
+                        cell.textContent = formattedDate;
+                    } else if (prop === 'gplxes') {
+                        const gplxArray = item[prop].map(gplx => gplx.rank);
+                        cell.textContent = gplxArray.join(', '); 
+                    } else {
+                        cell.textContent = item[prop];
+                    }
+                    row.appendChild(cell);
+                });
+
+                tableBody.appendChild(row);
+            });
+        }
     })
     .catch(err => console.log(err));
 }
-$(document).ready(function(){
-    $("#searchInput").keypress(function(event) {
-        if (event.which === 13) {
-            $("#btnSearch").click();
-        }
-    });
-    $("#btnSearch").on("click", function(){
-        var searchInput = $("#searchInput").val();
-        getCustomersBySearch(searchInput);
-    });
-    getCustomers();
-});
+
 
 // Thêm khách hàng mới
 async function addCustomer(){

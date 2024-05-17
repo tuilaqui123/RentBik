@@ -122,27 +122,7 @@
                     </tr>
                 </thead>
                 <tbody id="tableInsurance">
-<!--                    <tr class="bg-bone border-b  ">
-                        <th scope="row" class="px-6 py-4 font-normal">
-                            1
-                        </th>
-                        <td class="px-6 py-4">
-                            ABCXYZ
-                        </td>
-                        <td class="px-6 py-4">
-                            59G3-020.87
-                        </td>
-                        <td class="px-6 py-4">
-                            12/34/56
-                        </td>
-                        <td class="px-6 py-4">
-                            12/34/56
-                        </td>
-                        <td class="px-6 py-4">
-                            150.000
-                        </td>
-                        
-                    </tr>-->
+
                 </tbody>
             </table>
         </div>
@@ -163,5 +143,5 @@
         }
         ;
     </script>
-    <script src="../js/insurance_v1.js"> </script>
+    <script src="../js/insurance_v4.js"> </script>
 </html>
