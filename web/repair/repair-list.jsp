@@ -131,5 +131,5 @@
         ;
 
     </script>
-    <script src="../js/repair.js"></script>
+    <script src="../js/repair_v1.js"></script>
 </html>

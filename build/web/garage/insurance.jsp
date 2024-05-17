@@ -171,5 +171,5 @@
         }
         ;
     </script>
-    <script src="../js/insurance_v1.js"></script>
+    <script src="../js/insurance_v2.js"></script>
 </html>

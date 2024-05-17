@@ -125,12 +125,28 @@ async function getMaBhByBienSoXe(searchInput){
         method: 'GET',
         contentType: 'application/json',
         success: function(data) {
+            let licensePlateFound = false;
+            let checkFound = false;
             data.forEach(car => {
                 if (car.insurance !== null && car.licensePlate === searchInput){
                     $("#maBh").val(car.insurance.mabh);
                     $("#ngayHetHan").val(car.insurance.expiredDate);
+                    licensePlateFound = true;
+                }
+                
+                if (car.insurance === null && car.licensePlate === searchInput){
+                    checkFound = true;
                 }
             });
+            if (!licensePlateFound && !checkFound){
+                alert("Biển số xe không tồn tại");
+                return;
+            }
+            
+            if (!licensePlateFound && checkFound){
+                alert("Xe chưa đăng ký bảo hiểm");
+                return;
+            }
         },
         error: function(xhr, status, error) {
             console.error('Error fetching data:', error);

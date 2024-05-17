@@ -92,10 +92,10 @@
         <!--        customer infomation-->
         <div class="mb-5 flex flex-col w-full h-auto items-center justify-start pt-5 hidden" id="customerInfo">
             <div class="w-11/12 flex flex-row justify-between p-5 border rounded-lg bg-[#F4EBD9] border-black">
-                <p>Họ tên: <b id="nameCustomer">Phạm Ngọc Qúi</b></p>
-                <p>Ngày sinh: <b id="birthdayCustomer">17/08/2003</b></p>
-                <p>Số điện thoại: <b id="phoneCustomer">0912725561</b></p>
-                <p>GPLX: <b id="gplxCustomer">B1</b></p>
+                <p>Họ tên: <b id="nameCustomer"></b></p>
+                <p>Ngày sinh: <b id="birthdayCustomer"></b></p>
+                <p>Số điện thoại: <b id="phoneCustomer"></b></p>
+                <p>GPLX: <b id="gplxCustomer"></b></p>
             </div>
             <!--            car renting-->
             <div class="flex flex-col w-full h-auto items-center justify-start pt-10">
@@ -129,7 +129,7 @@
                                     </th>
                                     <th scope="col" class="px-6 py-3">
                                         <div class="flex items-center">
-                                            Giá tiền
+                                            Giá tiền thuê
                                             <a href="#"><svg class="w-3 h-3 ms-1.5" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 24 24">
                                                     <path d="M8.574 11.024h6.852a2.075 2.075 0 0 0 1.847-1.086 1.9 1.9 0 0 0-.11-1.986L13.736 2.9a2.122 2.122 0 0 0-3.472 0L6.837 7.952a1.9 1.9 0 0 0-.11 1.986 2.074 2.074 0 0 0 1.847 1.086Zm6.852 1.952H8.574a2.072 2.072 0 0 0-1.847 1.087 1.9 1.9 0 0 0 .11 1.985l3.426 5.05a2.123 2.123 0 0 0 3.472 0l3.427-5.05a1.9 1.9 0 0 0 .11-1.985 2.074 2.074 0 0 0-1.846-1.087Z"/>
                                                 </svg></a>
@@ -153,30 +153,8 @@
                                     </th>
                                 </tr>
                             </thead>
-                            <tbody class="bg-white">
-                                <tr class="bg-bone border-b ">
-                                    <th scope="row" class="px-6 py-4 font-normal">
-                                        1
-                                    </th>
-                                    <td class="px-6 py-4">
-                                        59G3-020.87
-                                    </td>
-                                    <td class="px-6 py-4">
-                                        Xe máy
-                                    </td>
-                                    <td class="px-6 py-4">
-                                        Air Blade
-                                    </td>
-                                    <td class="px-6 py-4">
-                                        150.000
-                                    </td>
-                                    <td class="px-6 py-4">
-                                        12/34/56
-                                    </td>
-                                    <td class="px-6 py-4">
-                                        12/34/56
-                                    </td>
-                                </tr>
+                            <tbody class="bg-white" id="tableHiringCar">
+                                    
                             </tbody>
                         </table>
                     </div>
@@ -270,7 +248,7 @@
                                 <input 
                                     id="hoTen"
                                     type="text"
-                                    placeholder="Phạm Ngọc Qúi"
+                                    placeholder="Họ tên"
                                     disabled
                                     class="mt-1 w-full h-12 text-base bg-white  text-black rounded-lg outline-none placeholder-black px-3"
                                     />
@@ -345,6 +323,7 @@
                             <div class="w-1/4">
                                 <p class="text-base font-medium">Ngày thuê xe</p>
                                 <input 
+                                    id="ngayThueXe"
                                     type="date"
                                     class="mt-1 w-full h-12 text-base  text-black rounded-lg outline-none placeholder-black px-3"
                                     />
@@ -352,6 +331,7 @@
                             <div class="w-1/4">
                                 <p class="text-base font-medium">Ngày trả xe</p>
                                 <input 
+                                    id="ngayTraXe"
                                     type="date"
                                     class="mt-1 w-full h-12 text-base  text-black rounded-lg outline-none placeholder-black px-3"
                                     />
@@ -366,7 +346,7 @@
 
                         </div>
                         <div class="w-full mt-5 flex justify-center">
-                            <button class="h-12 w-1/6 cursor-pointer bg-blue text-white  rounded-lg">
+                            <button onclick="addRetingCar()" class="h-12 w-1/6 cursor-pointer bg-blue text-white  rounded-lg">
                                 <p class="font-medium text-xl">Lưu phiếu</p>
                             </button>
                         </div>
@@ -392,5 +372,5 @@
         ;
 
     </script>
-    <script src="../js/rent_v1.js"></script>
+    <script src="../js/rent_v3.js"></script>
 </html>

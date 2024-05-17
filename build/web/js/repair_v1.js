@@ -1,6 +1,5 @@
 $(document).ready(function(){
     getMaintenance();
-
     $("#btnTraCuu").on("click", function(){
       var bienSoXe = $("#bienSoXe").val();
       if (bienSoXe !== ""){
@@ -29,13 +28,20 @@ async function getDetailCarByLicensePlate(searchInput){
         method: 'GET',
         contentType: 'application/json',
         success: function(data) {
+            let licensePlateFound = false;
             data.forEach(car => {
-                if (car.insurance !== null && car.licensePlate === searchInput){
+                if (car.licensePlate === searchInput){
                     $("#loaiXe").val(car.type.name);
                     $("#tenHang").val(car.brand.name);
                     $("#dongXe").val(car.series.name);
+                    licensePlateFound = true;
                 }
             });
+            
+            if (!licensePlateFound){
+                alert("Biển số xe không tồn tại");
+                return;
+            }
         },
         error: function(xhr, status, error) {
             console.error('Error fetching data:', error);

@@ -1,14 +1,14 @@
 $(document).ready(function(){
     $("#btnGetByCCCD").click(function(){
+        var customerInfo = document.getElementById('customerInfo');
         var cccd = document.getElementById("cccd").value;
-        
+
         if (cccd === ""){
             alert("Vui lòng nhập căn cước công dân");
             return;
         }
-        
+
         getCustomers(cccd);
-        
 
         $("#searchInput").keypress(function(event) {
             if (event.which === 13) {
@@ -20,6 +20,7 @@ $(document).ready(function(){
             var searchInput = $("#searchInput").val();
             getCarsBySearch(searchInput);
         });
+        
     });
 });
 
@@ -93,23 +94,23 @@ async function getCarsBySearch(searchInput){
         const tableBody = document.getElementById('tableCar');
         
         data.forEach(item => {
-                const row = document.createElement('tr');
-                row.classList.add('bg-bone', 'border-b', 'cursor-pointer', 'hover:bg-[#d7d9df]', 'selectedCar');
+            const row = document.createElement('tr');
+            row.classList.add('bg-bone', 'border-b', 'cursor-pointer', 'hover:bg-[#d7d9df]', 'selectedCar');
 
-                row.id = `${item.licensePlate}`;
+            row.id = `${item.licensePlate}`;
 
-                const properties = ['id', 'licensePlate', 'type', 'series', 'hirePrice'];
-                properties.forEach(prop => {
-                    const cell = document.createElement('td');
-                    cell.classList.add('px-6', 'py-4', 'font-normal', 'whitespace-nowrap');
+            const properties = ['id', 'licensePlate', 'type', 'series', 'hirePrice'];
+            properties.forEach(prop => {
+                const cell = document.createElement('td');
+                cell.classList.add('px-6', 'py-4', 'font-normal', 'whitespace-nowrap');
 
-                    if (prop === 'type' || prop === 'series'){
-                        cell.textContent = item[prop].name;
-                    }else{
-                        cell.textContent = item[prop];
-                    }
-                    row.appendChild(cell);
-                });
+                if (prop === 'type' || prop === 'series'){
+                    cell.textContent = item[prop].name;
+                }else{
+                    cell.textContent = item[prop];
+                }
+                row.appendChild(cell);
+            });
 
             tableBody.appendChild(row);
         });
@@ -178,7 +179,6 @@ async function getCustomers(cccd){
     })
     .then(res => res.json())
     .then(data => {
-        console.log(data);
         if (data.message === "CCCD doesn't exist"){
             alert("Căn cước công dân không tồn tại");
             return;
@@ -190,6 +190,36 @@ async function getCustomers(cccd){
         if (!newRenting.classList.contains("hidden")){
             newRenting.classList.toggle("hidden");
         }
+        
+        $("#tableHiringCar").empty();
+        const tableBody = document.getElementById('tableHiringCar');
+        
+        data.rents.forEach(item => {
+            const row = document.createElement('tr');
+            row.classList.add('bg-bone', 'border-b');
+
+            const properties = ['id', 'licensePlate', 'type', 'series', 'hirePrice', 'rentalDate', 'expiryDate'];
+            properties.forEach(prop => {
+                var objCar = item.car;
+                if (objCar){
+                    const cell = document.createElement('td');
+                    cell.classList.add('px-6', 'py-4', 'font-normal', 'whitespace-nowrap');
+
+                    if (prop === 'type' || prop === 'series'){
+                        cell.textContent = objCar[prop].name;
+                    }else if (prop === 'rentalDate' || prop === 'expiryDate'){
+                        const formattedDate = new Date(item[prop]).toLocaleDateString('en-GB');
+                        cell.textContent = formattedDate;
+                    }else{
+                        cell.textContent = objCar[prop];
+                    }
+                    
+                    row.appendChild(cell);
+                }
+            });
+
+            tableBody.appendChild(row);
+        });
         
         document.getElementById("nameCustomer").innerHTML = data.fullname;
         const formattedDate = new Date(data.birthday).toLocaleDateString('en-GB');
@@ -206,4 +236,104 @@ async function getCustomers(cccd){
 
     })
     .catch(err => console.log(err));
+}
+
+// Lấy id xe theo biển số xe
+const getCarId = async (bienSoXeInput) => {
+    var carId;
+    
+    await fetch('http://localhost:8080/api/v1/cars', {
+        method: "GET",
+        headers: {
+            "Content-Type": "application/json"
+        } 
+    })
+    .then(res => res.json())
+    .then(data => {
+        data.forEach(item => {
+            if (item.licensePlate === bienSoXeInput){
+                carId = item.id;
+            }
+        });
+    })  
+    .catch(err => console.log(err));
+    
+    return carId;
+};
+
+// Lấy id khách hàng theo tên khách hàng
+const getCustomerID = async (soDienThoaiInput) => {
+    var customerId;
+    
+    await fetch('http://localhost:8080/api/v1/customers', {
+        method: "GET",
+        headers: {
+            "Content-Type": "application/json"
+        }
+    })
+    .then(res => res.json())
+    .then(data => {
+        data.forEach(item => {
+            if (item.phoneNumber === soDienThoaiInput){
+                customerId = item.id;
+            }
+        });
+    })  
+    .catch(err => console.log(err));
+    
+    return customerId;
+};
+
+// Thêm phiếu thuê xe
+async function addRetingCar(){
+    var soDienThoai = document.getElementById("soDienThoai").value;
+    var customerId = await getCustomerID(soDienThoai);
+    
+    var bienSoXe = document.getElementById("bienSoXe").value;
+    var carId = await getCarId(bienSoXe);
+    
+    if (carId === undefined){
+        alert("Hãy chọn xe thuê từ danh sách xe trong kho");
+        return;
+    }
+    
+    var ngayThueXe = document.getElementById("ngayThueXe").value;
+    
+    if (ngayThueXe === ""){
+        alert("Vui lòng chọn ngày thuê xe");
+        return;
+    }
+    
+    var ngayTraXe = document.getElementById("ngayTraXe").value;
+    
+    if (ngayTraXe === ""){
+        alert("Vui lòng chọn ngày trả xe");
+        return;
+    }
+    
+    fetch('http://localhost:8080/api/v1/rents/add', {
+        method: "POST",
+        headers: {
+            'Accept': 'application/json',
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({
+            carId: carId,
+            customerId: customerId,
+            expiredDate: ngayTraXe,
+            rentalDate: ngayThueXe
+        })
+    })
+    .then((res) => res.json())
+    .then(data => {
+        if (data.message === "Car or customer not found"){
+            alert("Xe hoặc khách hàng không tồn tại");
+            return;
+        }
+        alert("Thêm phiếu thuê xe thành công");
+    })
+    .catch(err => console.log(err))
+    .finally(async () => {
+        location.reload();
+    });
 }

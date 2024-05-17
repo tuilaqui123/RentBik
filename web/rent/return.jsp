@@ -183,7 +183,7 @@
 <!--        return car-->
         <div class="flex flex-col w-full h-auto items-center justify-start pt-5">
             <div class="w-11/12 ">
-                <p class="text-xl font-medium">THÊM PHIẾU NHẬN XE</p>
+                <p class="text-xl font-medium">THÊM PHIẾU TRẢ XE</p>
                 <div class="bg-[#F4EBD9] p-5 mt-5 rounded-lg">
                     <div class=" flex flex-row gap-10">
                         <div class="w-1/5">
