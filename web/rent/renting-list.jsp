@@ -10,6 +10,7 @@
         <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
         <link href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
         <script src="https://cdn.tailwindcss.com"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js" integrity="sha512-v2CJ7UaYy4JwqLDIrZUI/4hqeoQieOmAZNXBeQyjo21dadnwR+8ZaIJVT8EE2iyI61OV8e6M8PP2/4hpQINQ/g==" crossorigin="anonymous" referrerpolicy="no-referrer"> </script>
         <title>RENTBIK</title>
     </head>
     <style>
@@ -73,12 +74,13 @@
                         <p class="text-base font-medium">SỐ CCCD</p>
                         <div class="flex flex-row items-center mt-1 w-full gap-4">
                             <input 
+                                id="cccd"
                                 type="text"
                                 placeholder="CCCD"
                                 class="w-full h-12 text-base bg-[#F4EBD9] text-black rounded-lg outline-none placeholder-black indent-3  "
                                 />
                             <button
-                                onclick="showCustomerInfo()"
+                                id="btnGetByCCCD"
                                 class="flex flex-row items-center w-auto h-12 p-3 px-4 cursor-pointer bg-blue text-white rounded-lg">
                                 <i class="fa-solid fa-arrow-right"></i>
                             </button>
@@ -90,10 +92,10 @@
         <!--        customer infomation-->
         <div class="mb-5 flex flex-col w-full h-auto items-center justify-start pt-5 hidden" id="customerInfo">
             <div class="w-11/12 flex flex-row justify-between p-5 border rounded-lg bg-[#F4EBD9] border-black">
-                <p>Họ tên: <b>Phạm Ngọc Qúi</b></p>
-                <p>Ngày sinh: <b>17/08/2003</b></p>
-                <p>Số điện thoại: <b>0912725561</b></p>
-                <p>GPLX: <b>B1</b></p>
+                <p>Họ tên: <b id="nameCustomer"></b></p>
+                <p>Ngày sinh: <b id="birthdayCustomer"></b></p>
+                <p>Số điện thoại: <b id="phoneCustomer"></b></p>
+                <p>GPLX: <b id="gplxCustomer"></b></p>
             </div>
             <!--            car renting-->
             <div class="flex flex-col w-full h-auto items-center justify-start pt-10">
@@ -151,30 +153,8 @@
                                     </th>
                                 </tr>
                             </thead>
-                            <tbody class="bg-white">
-                                <tr class="bg-bone border-b ">
-                                    <th scope="row" class="px-6 py-4 font-normal">
-                                        1
-                                    </th>
-                                    <td class="px-6 py-4">
-                                        59G3-020.87
-                                    </td>
-                                    <td class="px-6 py-4">
-                                        Xe máy
-                                    </td>
-                                    <td class="px-6 py-4">
-                                        Air Blade
-                                    </td>
-                                    <td class="px-6 py-4">
-                                        150.000
-                                    </td>
-                                    <td class="px-6 py-4">
-                                        12/34/56
-                                    </td>
-                                    <td class="px-6 py-4">
-                                        12/34/56
-                                    </td>
-                                </tr>
+                            <tbody class="bg-white" id="tableHiringCar">
+                                
                             </tbody>
                         </table>
                     </div>
@@ -236,30 +216,8 @@
                                     </th>
                                 </tr>
                             </thead>
-                            <tbody class="bg-white">
-                                <tr class="bg-bone border-b ">
-                                    <th scope="row" class="px-6 py-4 font-normal">
-                                        1
-                                    </th>
-                                    <td class="px-6 py-4">
-                                        59G3-020.87
-                                    </td>
-                                    <td class="px-6 py-4">
-                                        Xe máy
-                                    </td>
-                                    <td class="px-6 py-4">
-                                        Air Blade
-                                    </td>
-                                    <td class="px-6 py-4">
-                                        150.000
-                                    </td>
-                                    <td class="px-6 py-4">
-                                        12/34/56
-                                    </td>
-                                    <td class="px-6 py-4">
-                                        12/34/56
-                                    </td>
-                                </tr>
+                            <tbody class="bg-white" id="tableReturnedCar">
+                                
                             </tbody>
                         </table>
                     </div>
@@ -283,5 +241,5 @@
         ;
 
     </script>
-    <script src="js/app.js"></script>
+    <script src="../js/rentingList.js"></script>
 </html>

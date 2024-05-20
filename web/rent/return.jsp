@@ -169,6 +169,7 @@
                         <div class="w-1/5">
                             <p class="text-base font-medium">Biển số xe</p>
                             <input 
+                                id="bienSoXe"
                                 type="text"
                                 class="mt-1 w-full h-12 text-base  text-black rounded-lg outline-none placeholder-black px-3"
                                 />
@@ -176,6 +177,7 @@
                         <div class="w-1/5">
                             <p class="text-base font-medium">Ngày trả</p>
                             <input 
+                                id='ngayTra'
                                 type="date"
                                 class="mt-1 w-full h-12 text-base  text-black rounded-lg outline-none placeholder-black px-3"
                                 />
@@ -183,6 +185,7 @@
                         <div class="w-1/5">
                             <p class="text-base font-medium">Tiền thuê</p>
                             <input 
+                                id='tienThue'
                                 type="text"
                                 disabled
                                 class="mt-1 w-full h-12 bg-white text-base  text-black rounded-lg outline-none placeholder-black px-3"
@@ -191,6 +194,7 @@
                         <div class="w-1/5">
                             <p class="text-base font-medium">Tiền phạt quá hạn</p>
                             <input 
+                                id='tienPhat'
                                 type="text"
                                 disabled
                                 class="mt-1 w-full h-12 text-base bg-white   text-black rounded-lg outline-none placeholder-black px-3"
@@ -199,6 +203,7 @@
                         <div class="w-1/5">
                             <p class="text-base font-medium">Tổng tiền</p>
                             <input 
+                                id='tongTien'
                                 type="text"
                                 disabled
                                 class="mt-1 w-full h-12 text-base bg-white  text-black rounded-lg outline-none placeholder-black px-3"
@@ -208,6 +213,7 @@
                     <div class="w-full mt-5">
                             <p class="text-base font-medium">Ghi chú</p>
                             <input 
+                                id='ghiChu'
                                 type="text"
                                 class="mt-1 w-full h-12 text-base  text-black rounded-lg outline-none placeholder-black px-3"
                                 />
@@ -223,7 +229,7 @@
 
                         </div>
                         <div class="w-full mt-5 flex justify-center">
-                            <button class="h-12 w-1/6 cursor-pointer bg-blue text-white  rounded-lg">
+                            <button id="saveReturnCard" class="h-12 w-1/6 cursor-pointer bg-blue text-white  rounded-lg">
                                 <p class="font-medium text-xl">Lưu phiếu</p>
                             </button>
                         </div>
@@ -250,5 +256,5 @@
         ;
 
     </script>
-    <script src="../js/return.js"></script>
+    <script src="../js/return_v6.js"></script>
 </html>

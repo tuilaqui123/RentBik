@@ -35,7 +35,7 @@ function showNewRenting(){
 
 // Lấy danh sách xe
 async function getCars() {
-    fetch('http://localhost:8080/api/v1/cars')
+    fetch('http://localhost:8080/api/v1/cars/available')
         .then(res => res.json())
         .then(data => {
             $("#tableCar").empty();
@@ -95,7 +95,7 @@ async function getCars() {
 
 // Lấy danh sách xe theo điều kiện search
 async function getCarsBySearch(searchInput){
-    await fetch(`http://localhost:8080/api/v1/cars/search?keyword=${searchInput}`,{
+    await fetch(`http://localhost:8080/api/v1/cars/searchAvailable?keyword=${searchInput}`,{
         method: "GET",
         headers: {
             "Content-Type": "application/json"
@@ -219,7 +219,7 @@ async function getCustomers(cccd){
         
         $("#tableHiringCar").empty();
         const tableBody = document.getElementById('tableHiringCar');
-        
+        let check = false;
         if (data.rents.length === 0) {
             const row = document.createElement('tr');
             row.classList.add('bg-bone', 'border-b');
@@ -233,31 +233,49 @@ async function getCustomers(cccd){
             tableBody.appendChild(row);
         }else{
             data.rents.forEach(item => {
+                if (item.rentStatus === 'Dang thue'){
+                    check = true;
+                    const row = document.createElement('tr');
+                    row.classList.add('bg-bone', 'border-b');
+
+                    const properties = ['id', 'licensePlate', 'type', 'series', 'hirePrice', 'rentalDate', 'expiryDate'];
+                    properties.forEach(prop => {
+                        var objCar = item.car;
+                        if (objCar){
+                            const cell = document.createElement('td');
+                            cell.classList.add('px-6', 'py-4', 'font-normal', 'whitespace-nowrap');
+
+                            if (prop === 'type' || prop === 'series'){
+                                cell.textContent = objCar[prop].name;
+                            }else if (prop === 'rentalDate' || prop === 'expiryDate'){
+                                const formattedDate = new Date(item[prop]).toLocaleDateString('en-GB');
+                                cell.textContent = formattedDate;
+                            }else{
+                                cell.textContent = objCar[prop];
+                            }
+
+                            row.appendChild(cell);
+                        }
+                    });
+
+                    tableBody.appendChild(row);
+                }else {
+                    check = false;
+                }
+            });
+            
+            if (!check){
                 const row = document.createElement('tr');
                 row.classList.add('bg-bone', 'border-b');
 
-                const properties = ['id', 'licensePlate', 'type', 'series', 'hirePrice', 'rentalDate', 'expiryDate'];
-                properties.forEach(prop => {
-                    var objCar = item.car;
-                    if (objCar){
-                        const cell = document.createElement('td');
-                        cell.classList.add('px-6', 'py-4', 'font-normal', 'whitespace-nowrap');
+                const cell = document.createElement('td');
+                cell.colSpan = 7;
+                cell.classList.add('px-6', 'py-4', 'font-bold', 'whitespace-nowrap', 'text-center', 'text-[30px]', 'text-[#Ef4444]');
+                cell.textContent = 'Không có dữ liệu';
 
-                        if (prop === 'type' || prop === 'series'){
-                            cell.textContent = objCar[prop].name;
-                        }else if (prop === 'rentalDate' || prop === 'expiryDate'){
-                            const formattedDate = new Date(item[prop]).toLocaleDateString('en-GB');
-                            cell.textContent = formattedDate;
-                        }else{
-                            cell.textContent = objCar[prop];
-                        }
-
-                        row.appendChild(cell);
-                    }
-                });
-
+                row.appendChild(cell);
                 tableBody.appendChild(row);
-            });
+            }
         }
         
         document.getElementById("nameCustomer").innerHTML = data.fullname;
