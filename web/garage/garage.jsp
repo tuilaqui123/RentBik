@@ -41,7 +41,7 @@
                             Thuê trả</a>
                     </li>
                     <li>
-                        <a href="../report/report.jsp" class="font-medium p-4 cursor-pointer hover:bg-blue hover:text-white transition rounded-lg">
+                        <a href="../report/report-revenue.jsp" class="font-medium p-4 cursor-pointer hover:bg-blue hover:text-white transition rounded-lg">
                             Báo cáo</a>
                     </li>
                 </ul>

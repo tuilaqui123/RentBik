@@ -37,7 +37,7 @@
                         <a href="rent.jsp" class="font-medium p-4 cursor-pointer   bg-blue text-white  transition rounded-lg">Thuê trả</a>
                     </li>
                     <li>
-                        <a href="../report/report.jsp" class="font-medium p-4 cursor-pointer hover:bg-blue hover:text-white transition rounded-lg">Báo cáo</a>
+                        <a href="../report/report-revenue.jsp" class="font-medium p-4 cursor-pointer hover:bg-blue hover:text-white transition rounded-lg">Báo cáo</a>
                     </li>
                 </ul>
                 <i class="fa-solid fa-user text-2xl p-2 px-3 border rounded-full hover:bg-blue hover:text-white transition cursor-pointer"></i>
@@ -89,7 +89,7 @@
                 </div>
             </div>
         </div>
-        <!--        customer infomation-->
+        <!--customer infomation-->
         <div class="mb-5 flex flex-col w-full h-auto items-center justify-start pt-5 hidden" id="customerInfo">
             <div class="w-11/12 flex flex-row justify-between p-5 border rounded-lg bg-[#F4EBD9] border-black">
                 <p>Họ tên: <b id="nameCustomer"></b></p>
@@ -97,16 +97,16 @@
                 <p>Số điện thoại: <b id="phoneCustomer"></b></p>
                 <p>GPLX: <b id="gplxCustomer"></b></p>
             </div>
-            <!--            car renting-->
+            <!--car renting-->
             <div class="flex flex-col w-full h-auto items-center justify-start pt-10">
                 <div class="w-11/12 ">
-                    <p class="text-xl font-medium">XE ĐANG THUÊ</p>
+                    <p class="text-xl font-medium">DANH SÁCH PHIẾU MƯỢN</p>
                     <div class="relative w-full pt-5 overflow-x-auto flex flex-col items-center justify-center">
                         <table class="w-full text-left rounded-t-lg overflow-hidden font-light ">
                             <thead class="text-base text-white bg-blue h-14 ">
                                 <tr>
                                     <th scope="col" class="px-6  py-3">
-                                        STT
+                                        Mã Phiếu Mượn
                                     </th>
                                     <th scope="col" class="px-6 py-3">
                                         Biển số xe
@@ -114,41 +114,26 @@
                                     <th scope="col" class="px-6 py-3">
                                         <div class="flex items-center">
                                             Loại xe
-                                            <a href="#"><svg class="w-3 h-3 ms-1.5" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 24 24">
-                                                    <path d="M8.574 11.024h6.852a2.075 2.075 0 0 0 1.847-1.086 1.9 1.9 0 0 0-.11-1.986L13.736 2.9a2.122 2.122 0 0 0-3.472 0L6.837 7.952a1.9 1.9 0 0 0-.11 1.986 2.074 2.074 0 0 0 1.847 1.086Zm6.852 1.952H8.574a2.072 2.072 0 0 0-1.847 1.087 1.9 1.9 0 0 0 .11 1.985l3.426 5.05a2.123 2.123 0 0 0 3.472 0l3.427-5.05a1.9 1.9 0 0 0 .11-1.985 2.074 2.074 0 0 0-1.846-1.087Z"/>
-                                                </svg></a>
                                         </div>
                                     </th>
                                     <th scope="col" class="px-6 py-3">
                                         <div class="flex items-center">
                                             Dòng xe
-                                            <a href="#"><svg class="w-3 h-3 ms-1.5" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 24 24">
-                                                    <path d="M8.574 11.024h6.852a2.075 2.075 0 0 0 1.847-1.086 1.9 1.9 0 0 0-.11-1.986L13.736 2.9a2.122 2.122 0 0 0-3.472 0L6.837 7.952a1.9 1.9 0 0 0-.11 1.986 2.074 2.074 0 0 0 1.847 1.086Zm6.852 1.952H8.574a2.072 2.072 0 0 0-1.847 1.087 1.9 1.9 0 0 0 .11 1.985l3.426 5.05a2.123 2.123 0 0 0 3.472 0l3.427-5.05a1.9 1.9 0 0 0 .11-1.985 2.074 2.074 0 0 0-1.846-1.087Z"/>
-                                                </svg></a>
-                                        </div>
-                                    </th>
-                                    <th scope="col" class="px-6 py-3">
-                                        <div class="flex items-center">
-                                            Giá tiền
-                                            <a href="#"><svg class="w-3 h-3 ms-1.5" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 24 24">
-                                                    <path d="M8.574 11.024h6.852a2.075 2.075 0 0 0 1.847-1.086 1.9 1.9 0 0 0-.11-1.986L13.736 2.9a2.122 2.122 0 0 0-3.472 0L6.837 7.952a1.9 1.9 0 0 0-.11 1.986 2.074 2.074 0 0 0 1.847 1.086Zm6.852 1.952H8.574a2.072 2.072 0 0 0-1.847 1.087 1.9 1.9 0 0 0 .11 1.985l3.426 5.05a2.123 2.123 0 0 0 3.472 0l3.427-5.05a1.9 1.9 0 0 0 .11-1.985 2.074 2.074 0 0 0-1.846-1.087Z"/>
-                                                </svg></a>
                                         </div>
                                     </th>
                                     <th scope="col" class="px-6 py-3">
                                         <div class="flex items-center">
                                             Ngày mượn
-                                            <a href="#"><svg class="w-3 h-3 ms-1.5" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 24 24">
-                                                    <path d="M8.574 11.024h6.852a2.075 2.075 0 0 0 1.847-1.086 1.9 1.9 0 0 0-.11-1.986L13.736 2.9a2.122 2.122 0 0 0-3.472 0L6.837 7.952a1.9 1.9 0 0 0-.11 1.986 2.074 2.074 0 0 0 1.847 1.086Zm6.852 1.952H8.574a2.072 2.072 0 0 0-1.847 1.087 1.9 1.9 0 0 0 .11 1.985l3.426 5.05a2.123 2.123 0 0 0 3.472 0l3.427-5.05a1.9 1.9 0 0 0 .11-1.985 2.074 2.074 0 0 0-1.846-1.087Z"/>
-                                                </svg></a>
                                         </div>
                                     </th>
                                     <th scope="col" class="px-6 py-3">
                                         <div class="flex items-center">
-                                            Ngày trả
-                                            <a href="#"><svg class="w-3 h-3 ms-1.5" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 24 24">
-                                                    <path d="M8.574 11.024h6.852a2.075 2.075 0 0 0 1.847-1.086 1.9 1.9 0 0 0-.11-1.986L13.736 2.9a2.122 2.122 0 0 0-3.472 0L6.837 7.952a1.9 1.9 0 0 0-.11 1.986 2.074 2.074 0 0 0 1.847 1.086Zm6.852 1.952H8.574a2.072 2.072 0 0 0-1.847 1.087 1.9 1.9 0 0 0 .11 1.985l3.426 5.05a2.123 2.123 0 0 0 3.472 0l3.427-5.05a1.9 1.9 0 0 0 .11-1.985 2.074 2.074 0 0 0-1.846-1.087Z"/>
-                                                </svg></a>
+                                            Hạn trả
+                                        </div>
+                                    </th>
+                                    <th scope="col" class="px-6 py-3">
+                                        <div class="flex items-center">
+                                            Tình trạng
                                         </div>
                                     </th>
                                 </tr>
@@ -160,59 +145,28 @@
                     </div>
                 </div>
             </div>
-            <!--            car returned-->
+            <!--car returned-->
             <div class="flex flex-col w-full h-auto items-center justify-start pt-10">
                 <div class="w-11/12 ">
-                    <p class="text-xl font-medium">XE ĐÃ TRẢ</p>
+                    <p class="text-xl font-medium">DANH SÁCH PHIẾU TRẢ</p>
                     <div class="relative w-full pt-5 overflow-x-auto flex flex-col items-center justify-center">
                         <table class="w-full text-left rounded-t-lg overflow-hidden font-light ">
                             <thead class="text-base text-white bg-blue h-14 ">
                                 <tr>
                                     <th scope="col" class="px-6  py-3">
-                                        STT
+                                        Mã Phiếu Trả
                                     </th>
                                     <th scope="col" class="px-6 py-3">
-                                        Biển số xe
+                                        Mã Phiếu Mượn
                                     </th>
                                     <th scope="col" class="px-6 py-3">
-                                        <div class="flex items-center">
-                                            Loại xe
-                                            <a href="#"><svg class="w-3 h-3 ms-1.5" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 24 24">
-                                                    <path d="M8.574 11.024h6.852a2.075 2.075 0 0 0 1.847-1.086 1.9 1.9 0 0 0-.11-1.986L13.736 2.9a2.122 2.122 0 0 0-3.472 0L6.837 7.952a1.9 1.9 0 0 0-.11 1.986 2.074 2.074 0 0 0 1.847 1.086Zm6.852 1.952H8.574a2.072 2.072 0 0 0-1.847 1.087 1.9 1.9 0 0 0 .11 1.985l3.426 5.05a2.123 2.123 0 0 0 3.472 0l3.427-5.05a1.9 1.9 0 0 0 .11-1.985 2.074 2.074 0 0 0-1.846-1.087Z"/>
-                                                </svg></a>
-                                        </div>
+                                        Ngày trả
                                     </th>
                                     <th scope="col" class="px-6 py-3">
-                                        <div class="flex items-center">
-                                            Dòng xe
-                                            <a href="#"><svg class="w-3 h-3 ms-1.5" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 24 24">
-                                                    <path d="M8.574 11.024h6.852a2.075 2.075 0 0 0 1.847-1.086 1.9 1.9 0 0 0-.11-1.986L13.736 2.9a2.122 2.122 0 0 0-3.472 0L6.837 7.952a1.9 1.9 0 0 0-.11 1.986 2.074 2.074 0 0 0 1.847 1.086Zm6.852 1.952H8.574a2.072 2.072 0 0 0-1.847 1.087 1.9 1.9 0 0 0 .11 1.985l3.426 5.05a2.123 2.123 0 0 0 3.472 0l3.427-5.05a1.9 1.9 0 0 0 .11-1.985 2.074 2.074 0 0 0-1.846-1.087Z"/>
-                                                </svg></a>
-                                        </div>
+                                        Số tiền phạt
                                     </th>
                                     <th scope="col" class="px-6 py-3">
-                                        <div class="flex items-center">
-                                            Giá tiền
-                                            <a href="#"><svg class="w-3 h-3 ms-1.5" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 24 24">
-                                                    <path d="M8.574 11.024h6.852a2.075 2.075 0 0 0 1.847-1.086 1.9 1.9 0 0 0-.11-1.986L13.736 2.9a2.122 2.122 0 0 0-3.472 0L6.837 7.952a1.9 1.9 0 0 0-.11 1.986 2.074 2.074 0 0 0 1.847 1.086Zm6.852 1.952H8.574a2.072 2.072 0 0 0-1.847 1.087 1.9 1.9 0 0 0 .11 1.985l3.426 5.05a2.123 2.123 0 0 0 3.472 0l3.427-5.05a1.9 1.9 0 0 0 .11-1.985 2.074 2.074 0 0 0-1.846-1.087Z"/>
-                                                </svg></a>
-                                        </div>
-                                    </th>
-                                    <th scope="col" class="px-6 py-3">
-                                        <div class="flex items-center">
-                                            Ngày mượn
-                                            <a href="#"><svg class="w-3 h-3 ms-1.5" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 24 24">
-                                                    <path d="M8.574 11.024h6.852a2.075 2.075 0 0 0 1.847-1.086 1.9 1.9 0 0 0-.11-1.986L13.736 2.9a2.122 2.122 0 0 0-3.472 0L6.837 7.952a1.9 1.9 0 0 0-.11 1.986 2.074 2.074 0 0 0 1.847 1.086Zm6.852 1.952H8.574a2.072 2.072 0 0 0-1.847 1.087 1.9 1.9 0 0 0 .11 1.985l3.426 5.05a2.123 2.123 0 0 0 3.472 0l3.427-5.05a1.9 1.9 0 0 0 .11-1.985 2.074 2.074 0 0 0-1.846-1.087Z"/>
-                                                </svg></a>
-                                        </div>
-                                    </th>
-                                    <th scope="col" class="px-6 py-3">
-                                        <div class="flex items-center">
-                                            Ngày trả
-                                            <a href="#"><svg class="w-3 h-3 ms-1.5" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 24 24">
-                                                    <path d="M8.574 11.024h6.852a2.075 2.075 0 0 0 1.847-1.086 1.9 1.9 0 0 0-.11-1.986L13.736 2.9a2.122 2.122 0 0 0-3.472 0L6.837 7.952a1.9 1.9 0 0 0-.11 1.986 2.074 2.074 0 0 0 1.847 1.086Zm6.852 1.952H8.574a2.072 2.072 0 0 0-1.847 1.087 1.9 1.9 0 0 0 .11 1.985l3.426 5.05a2.123 2.123 0 0 0 3.472 0l3.427-5.05a1.9 1.9 0 0 0 .11-1.985 2.074 2.074 0 0 0-1.846-1.087Z"/>
-                                                </svg></a>
-                                        </div>
+                                        Tổng tiền trả
                                     </th>
                                 </tr>
                             </thead>
@@ -241,5 +195,5 @@
         ;
 
     </script>
-    <script src="../js/rentingList.js"></script>
+    <script src="../js/rentingList_v1.js"></script>
 </html>

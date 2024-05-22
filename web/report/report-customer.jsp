@@ -10,6 +10,7 @@
         <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
         <link href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
         <script src="https://cdn.tailwindcss.com"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js" integrity="sha512-v2CJ7UaYy4JwqLDIrZUI/4hqeoQieOmAZNXBeQyjo21dadnwR+8ZaIJVT8EE2iyI61OV8e6M8PP2/4hpQINQ/g==" crossorigin="anonymous" referrerpolicy="no-referrer"> </script>
         <title>RENTBIK</title>
     </head>
     <style>
@@ -42,23 +43,58 @@
                 <i class="fa-solid fa-user text-2xl p-2 px-3 border rounded-full hover:bg-blue hover:text-white transition cursor-pointer"></i>
             </div>
         </div>
-        <!--        garage button-->
+        <!--garage button-->
         <div class="flex flex-col w-full h-auto items-center justify-start pt-5">
             <div class="w-11/12">
                 <ul class="flex flex-row items-center justify-between w-2/5 gap-2 py-4 px-2 bg-blue rounded-lg">
                     <li>
-                        <a href="garage.jsp" class="font-medium p-3 cursor-pointer bg-white text-blue  transition rounded-lg">
-                            Doanh thu</a>
+                        <a href="report-revenue.jsp" class="font-medium p-3 cursor-pointer text-white  hover:bg-white hover:text-blue    transition rounded-lg">Báo cáo thu nhập</a>
                     </li>
                     <li>
-                        <a href="insurance-list.jsp" class="font-medium p-3 cursor-pointer text-white hover:bg-white hover:text-blue transition rounded-lg">
-                            Danh sách bảo hiểm</a>
+                        <a href="report-customer.jsp" class="font-medium p-3 cursor-pointer  bg-white text-blue transition rounded-lg">Báo cáo khách hàng</a>
                     </li> 
                     <li>
-                        <a href="insurance.jsp" class="font-medium p-3 cursor-pointer text-white  hover:bg-white hover:text-blue transition rounded-lg">
-                            Bảo hiểm</a>
+                        <a href="report-car.jsp" class="font-medium p-3 cursor-pointer text-white  hover:bg-white hover:text-blue    transition rounded-lg">Báo cáo xe</a>
                     </li>
                 </ul>
+            </div>
+        </div>
+        
+        <div class="flex flex-col w-full h-auto items-center justify-start pt-10">
+            <div class="w-11/12 ">
+                <p class="text-2xl font-medium text-center">BÁO CÁO KHÁCH HÀNG</p>
+                <div class="relative w-full pt-5 overflow-x-auto flex flex-col items-center justify-center">
+                    <table class="w-full text-left rounded-t-lg overflow-hidden font-light ">
+                        <thead class="text-base text-white bg-blue h-14 ">
+                            <tr>
+                                <th scope="col" class="px-6  py-3">
+                                    Mã khách hàng
+                                </th>
+                                <th scope="col" class="px-6 py-3">
+                                    Tên khách hàng
+                                </th>
+                                <th scope="col" class="px-6 py-3">
+                                    Số lượt thuê
+                                </th>
+                                <th scope="col" class="px-6 py-3">
+                                    Số lượt trả
+                                </th>
+                                <th scope="col" class="px-6 py-3">
+                                    Số xe đang thuê
+                                </th>
+                                <th scope="col" class="px-6 py-3">
+                                    Số xe đã trả
+                                </th>
+                                <th scope="col" class="px-6 py-3">
+                                    Tổng tiền thuê
+                                </th>
+                            </tr>
+                        </thead>
+                        <tbody class="bg-white" id="tableReportCustomer">
+
+                        </tbody>
+                    </table>
+                </div>
             </div>
         </div>
     </body>
@@ -77,6 +113,6 @@
             }
         }
         ;
-
     </script>
+    <script src="../js/report_customer_v1.js"></script>
 </html>

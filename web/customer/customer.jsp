@@ -37,7 +37,7 @@
                         <a href="../rent/rent.jsp" class="font-medium p-4 cursor-pointer hover:bg-blue hover:text-white transition rounded-lg">Thuê trả</a>
                     </li>
                     <li>
-                        <a href="../report/report.jsp" class="font-medium p-4 cursor-pointer hover:bg-blue hover:text-white transition rounded-lg">Báo cáo</a>
+                        <a href="../report/report-revenue.jsp" class="font-medium p-4 cursor-pointer hover:bg-blue hover:text-white transition rounded-lg">Báo cáo</a>
                     </li>
                 </ul>
                 <i class="fa-solid fa-user text-2xl p-2 px-3 border rounded-full hover:bg-blue hover:text-white transition cursor-pointer"></i>
@@ -115,7 +115,7 @@
                 </tbody>
             </table>
         </div>
-        <!--            add customer-->
+        <!--add customer-->
         <div class="absolute w-full h-auto py-20 top-0 flex items-center justify-center hidden overflow-hidden" id="addCustomer">
             <div class="absolute w-full h-[200vh] bg-gray-400 opacity-75"></div>
             <div class="z-10 w-1/3 h-4/5 h-auto bg-white relative z-10 rounded-lg px-5 py-7 shadow-lg shadow-black">

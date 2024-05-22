@@ -37,13 +37,13 @@
                         <a href="../rent/rent.jsp" class="font-medium p-4 cursor-pointer hover:bg-blue hover:text-white transition rounded-lg">Thuê trả</a>
                     </li>
                     <li>
-                        <a href="../rent/report.jsp" class="font-medium p-4 cursor-pointer hover:bg-blue hover:text-white transition rounded-lg">Báo cáo</a>
+                        <a href="../report/report-revenue.jsp" class="font-medium p-4 cursor-pointer hover:bg-blue hover:text-white transition rounded-lg">Báo cáo</a>
                     </li>
                 </ul>
                 <i class="fa-solid fa-user text-2xl p-2 px-3 border rounded-full hover:bg-blue hover:text-white transition cursor-pointer"></i>
             </div>
         </div>
-        <!--        garage button-->
+        <!--garage button-->
         <div class="flex flex-col w-full h-auto items-center justify-start pt-5">
             <div class="w-11/12">
                 <ul class="flex flex-row items-center justify-between w-2/5 gap-2 py-4 px-2 bg-blue rounded-lg">
