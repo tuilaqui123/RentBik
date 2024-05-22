@@ -64,7 +64,7 @@
                     <i class="fa-solid fa-plus mr-2"></i>
                     <p class="font-normal text-base">Thêm khách hàng</p>
                 </button>
-                <button class="h-12 w-14 cursor-pointer bg-[#e4e4e4] text-[#7c7c7c] text-xl rounded-lg">
+                <button class="h-12 w-14 cursor-pointer bg-[#e4e4e4] text-[#7c7c7c] text-xl rounded-lg" onclick="showUpdateCustomer()">
                     <i class="fa-solid fa-pen-to-square"></i>
                 </button>
                 <button class="h-12 w-14 cursor-pointer  bg-[#e4e4e4] text-[#7c7c7c] text-xl rounded-lg">
@@ -183,6 +183,85 @@
                 </div>
             </div>
         </div>
+        
+        <!--update customer-->
+        <div class="absolute w-full h-auto py-20 top-0 flex items-center justify-center hidden overflow-hidden" id="updateCustomer">
+            <div class="absolute w-full h-[200vh] bg-gray-400 opacity-75"></div>
+            <div class="z-10 w-1/3 h-4/5 h-auto bg-white relative z-10 rounded-lg px-5 py-7 shadow-lg shadow-black">
+                <div class="flex flex-row justify-between items-center mb-7">
+                    <p class="text-xl font-medium">CHỈNH SỬA KHÁCH HÀNG</p>
+                    <i class="fa-solid fa-x text-lg font-black cursor-pointer hover:text-[#ff0000]" onclick="showUpdateCustomer()"></i>
+                </div>
+                <div class="mb-4">
+                    <p class="font-medium mb-1">CCCD</p>
+                    <div class="flex flex-row items-center gap-4 h-8">
+                        <select id="updateSelectedCcccd" class="border border-gray-300 rounded-lg h-10 cursor-pointer text-black w-full bg-[#e4e4e4]">
+                        
+                        </select>
+                    </div>
+                </div>
+                <div class="mb-4">
+                    <p class="font-medium mb-1">Họ và tên</p>
+                    <input 
+                        disabled
+                        type="text"
+                        placeholder="Họ và tên"
+                        class="w-full bg-[#e4e4e4] text-[#7c7c7c] text-base rounded-lg outline-none h-9 indent-2"
+                        id="updateHoVaTen"
+                    />
+                </div>
+                <div class="mb-4">
+                    <p class="font-medium mb-1">Ngày sinh</p>
+                    <input 
+                        type="date"
+                        disabled
+                        placeholder="Ngày sinh"
+                        class="w-full bg-[#e4e4e4] text-[#7c7c7c] text-base rounded-lg outline-none h-9 indent-2 pr-2"
+                        id="updateNgaySinh"
+                    />
+                </div>
+                <div class="mb-4">
+                    <p class="font-medium mb-1">Số điện thoại</p>
+                    <input 
+                        disabled
+                        type="text"
+                        placeholder="Số điện thoại"
+                        class="w-full bg-[#e4e4e4] text-[#7c7c7c] text-base rounded-lg outline-none h-9 indent-2"
+                        id="updateSoDienThoai"
+                    />
+                </div>
+                <div class="mb-4">
+                    <p class="font-medium mb-1">Giấy phép lái xe</p>
+                    <div class="flex flex-row items-center gap-4 h-8">
+                        <input 
+                            disabled
+                            type="text"
+                            placeholder="Số điện thoại"
+                            class="w-full bg-[#e4e4e4] text-[#7c7c7c] text-base rounded-lg outline-none h-9 indent-2"
+                            id="updateGplx"
+                        />
+                        <select id="updateSelectedGplx" class="border border-gray-300 rounded-lg h-10 text-black w-full bg-[#e4e4e4]">
+                        
+                        </select>
+                    </div>
+
+                </div>
+                <div class="mb-7">
+                    <p class="font-medium mb-1">Ghi chú</p>
+                    <input 
+                        disabled
+                        type="text"
+                        class="w-full bg-[#e4e4e4] text-[#7c7c7c] text-base rounded-lg outline-none h-9 indent-2"
+                        id="updateGhiChu"
+                    />
+                </div>
+                <div class="w-full flex justify-center items-center h-10">
+                    <button onclick="updateCustomer()" class="w-1/3 h-full px-4 cursor-pointer bg-blue text-white rounded-lg">
+                        <p class="text-lg font-medium">Chỉnh sửa</p>
+                    </button>
+                </div>
+            </div>
+        </div>
     </body>
     <script>
         tailwind.config = {
@@ -201,5 +280,5 @@
         ;
 
     </script>
-    <script src="../js/app_v2.js"></script>
+    <script src="../js/app_v4.js"></script>
 </html>
