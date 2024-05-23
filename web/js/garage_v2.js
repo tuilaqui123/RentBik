@@ -6,7 +6,8 @@ $(document).ready(function(){
     getInsurancesForBSX();
     getCars();
     getBienSoXeWithNoInsurance();
-    
+    getBienSoXe('update');
+    getBienSoXe('delete');
     $("#iconThemTenHang").on('click', function(){
         addBrand();
     });
@@ -40,6 +41,16 @@ $(document).ready(function(){
         var searchInput = $("#searchInput").val();
         getCarsBySearch(searchInput);
     });
+    
+    $("#updateSelectedBXS").change(function(){
+        var carId = $(this).val();
+        getInfoCarById(carId, 'update');
+    });
+    
+    $("#deleteSelectedBXS").change(function(){
+        var carId = $(this).val();
+        getInfoCarById(carId, 'delete');
+    });
 });
 
 function showAddCar(){
@@ -60,6 +71,16 @@ function showAddSeries(){
 function showAddInsurance(){
     var addInsurance = document.getElementById('addInsurance');
     addInsurance.classList.toggle("hidden");
+}
+
+function showUpdateCar(){
+    var updateCar = document.getElementById('updateCar');
+    updateCar.classList.toggle("hidden");
+}
+
+function showDeleteCar(){
+    var deleteCar = document.getElementById('deleteCar');
+    deleteCar.classList.toggle("hidden");
 }
 
 // Lấy danh sách hãng xe
@@ -592,4 +613,69 @@ async function addInsuranceForExistCar(){
     .finally(() => {
         location.reload();
     });
+}
+
+// Lấy danh sách biển số xe
+async function getBienSoXe(method){
+    var mabhs = (method === 'update' ? document.getElementById("updateSelectedBXS") : document.getElementById("deleteSelectedBXS"));
+    
+    var defaultOption = document.createElement("option");
+    defaultOption.text = "Biển số xe";
+    defaultOption.value = "";
+    defaultOption.selected = true; 
+    defaultOption.disabled = true;
+    mabhs.appendChild(defaultOption);
+    
+    await fetch('http://localhost:8080/api/v1/cars', {
+        method: "GET",
+        headers: {
+            "Content-Type": "application/json"
+        }
+    })
+    .then(res => res.json())
+    .then(data => {
+        data.forEach(option => {
+            var optionElement = document.createElement("option");
+            optionElement.text = option.licensePlate;
+            optionElement.value = option.id;
+            mabhs.add(optionElement);
+        });
+    })
+    .catch(err => console.log(err));
+}
+
+// Lấy thông tin xe theo id
+async function getInfoCarById(car_id, method){
+    await fetch(`http://localhost:8080/api/v1/cars/${car_id}`,{
+        method: "GET",
+        headers: {
+            "Content-Type": "application/json"
+        }
+    })
+    .then(res => res.json())
+    .then(data => {
+        if (method === 'update'){
+            $("#updateBSX").val(data.licensePlate);
+            $('#updateBSX').removeAttr('disabled');
+
+            $("#updateNgayMua").val(data.purchaseDate);
+            $('#updateNgayMua').removeAttr('disabled');
+
+            $("#updateGiaXe").val(data.purchasePrice);
+            $('#updateGiaXe').removeAttr('disabled');
+
+            $("#updateGhiChu").val(data.carNote);
+            $('#updateGhiChu').removeAttr('disabled');
+        }else{
+            console.log(data);
+            $("#deleteSelectedBXS").val(data.id);
+
+            $("#deleteNgayMua").val(data.purchaseDate);
+
+            $("#deleteGiaXe").val(data.purchasePrice);
+
+            $("#deleteGhiChu").val(data.carNote);
+        }
+    })
+    .catch(err => console.log(err));
 }

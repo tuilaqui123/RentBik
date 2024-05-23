@@ -48,7 +48,7 @@
                 <i class="fa-solid fa-user text-2xl p-2 px-3 border rounded-full hover:bg-blue hover:text-white transition cursor-pointer"></i>
             </div>
         </div>
-        <!--        garage button-->
+        <!--garage button-->
         <div class="flex flex-col w-full h-auto items-center justify-start pt-5">
             <div class="w-11/12">
                 <ul class="flex flex-row items-center justify-between w-2/5 gap-2 py-4 px-2 bg-blue rounded-lg">
@@ -100,10 +100,10 @@
                         <i class="fa-solid fa-plus mr-2"></i>
                         <p class="font-normal text-base">Thêm bảo hiểm</p>
                     </button>
-                    <button class="h-12 w-14 cursor-pointer bg-[#e4e4e4] text-[#7c7c7c] text-xl rounded-lg">
+                    <button class="h-12 w-14 cursor-pointer bg-[#e4e4e4] text-[#7c7c7c] text-xl rounded-lg" onclick='showUpdateCar()'>
                         <i class="fa-solid fa-pen-to-square"></i>
                     </button>
-                    <button class="h-12 w-14 cursor-pointer  bg-[#e4e4e4] text-[#7c7c7c] text-xl rounded-lg">
+                    <button class="h-12 w-14 cursor-pointer  bg-[#e4e4e4] text-[#7c7c7c] text-xl rounded-lg" onclick="showDeleteCar()">
                         <i class="fa-solid fa-trash"></i>
                     </button>
                 </div>
@@ -336,6 +336,119 @@
                 </div>
             </div>
         </div>
+        
+        <!-- update car -->
+        <div class="w-full h-screen absolute top-0 flex items-center justify-center hidden" id="updateCar">
+            <div class="absolute w-full h-[100vh] bg-gray-400 opacity-75"></div>
+            <div class="z-10 w-1/3 h-4/5 h-auto bg-white relative z-10 rounded-lg px-5 py-7 shadow-lg shadow-black">
+                <div class="flex flex-row justify-between items-center mb-7">
+                    <p class="text-xl font-medium">CHỈNH SỬA XE</p>
+                    <i class="fa-solid fa-x text-lg font-black cursor-pointer hover:text-[#ff0000]" onclick="showUpdateCar()"></i>
+                </div>
+                <div class="mb-4">
+                    <p class="font-medium mb-1">Biển số xe</p>
+                    <div class="flex flex-row items-center gap-4 h-8">
+                        <select id="updateSelectedBXS" class="border border-gray-300 rounded-lg h-10 cursor-pointer text-black w-full bg-[#e4e4e4]">
+                        
+                        </select>
+                        <input 
+                            disabled
+                            type="text"
+                            placeholder="Biển số xe"
+                            class="w-full bg-[#e4e4e4] text-[#7c7c7c] text-base rounded-lg outline-none h-9 indent-2"
+                            id="updateBSX"
+                        />
+                    </div>
+                </div>
+                <div class="mb-4">
+                    <p class="font-medium mb-1">Ngày mua</p>
+                    <input 
+                        disabled
+                        type="date"
+                        class="w-full bg-[#e4e4e4] text-[#7c7c7c] text-base rounded-lg outline-none h-9 indent-2 pr-2"
+                        id="updateNgayMua"
+                    />
+                </div>
+                <div class="mb-4">
+                    <p class="font-medium mb-1">Giá mua</p>
+                    <input 
+                        disabled
+                        type="text"
+                        placeholder="Giá mua"
+                        class="w-full bg-[#e4e4e4] text-[#7c7c7c] text-base rounded-lg outline-none h-9 indent-2"
+                        id="updateGiaXe"
+                    />
+                </div>
+                <div class="mb-4">
+                    <p class="font-medium mb-1">Ghi chú</p>
+                    <input 
+                        disabled
+                        type="text"
+                        placeholder="Giá mua"
+                        class="w-full bg-[#e4e4e4] text-[#7c7c7c] text-base rounded-lg outline-none h-9 indent-2"
+                        id="updateGhiChu"
+                    />
+                </div>
+                <div class="w-full flex justify-center items-center h-10">
+                    <button onclick="updateCar()" class="w-1/3 h-full px-4 cursor-pointer bg-blue text-white rounded-lg">
+                        <p class="text-lg font-medium">Chỉnh sửa</p>
+                    </button>
+                </div>
+            </div>
+        </div>
+        
+        <!-- delete car -->
+        <div class="w-full h-screen absolute top-0 flex items-center justify-center hidden" id="deleteCar">
+            <div class="absolute w-full h-[100vh] bg-gray-400 opacity-75"></div>
+            <div class="z-10 w-1/3 h-4/5 h-auto bg-white relative z-10 rounded-lg px-5 py-7 shadow-lg shadow-black">
+                <div class="flex flex-row justify-between items-center mb-7">
+                    <p class="text-xl font-medium">XÓA XE</p>
+                    <i class="fa-solid fa-x text-lg font-black cursor-pointer hover:text-[#ff0000]" onclick="showDeleteCar()"></i>
+                </div>
+                <div class="mb-4">
+                    <p class="font-medium mb-1">Biển số xe</p>
+                    <div class="flex flex-row items-center gap-4 h-8">
+                        <select id="deleteSelectedBXS" class="border border-gray-300 rounded-lg h-10 cursor-pointer text-black w-full bg-[#e4e4e4]">
+                        
+                        </select>
+                    </div>
+                </div>
+                <div class="mb-4">
+                    <p class="font-medium mb-1">Ngày mua</p>
+                    <input 
+                        disabled
+                        type="date"
+                        class="w-full bg-[#e4e4e4] text-[#7c7c7c] text-base rounded-lg outline-none h-9 indent-2 pr-2"
+                        id="deleteNgayMua"
+                    />
+                </div>
+                <div class="mb-4">
+                    <p class="font-medium mb-1">Giá mua</p>
+                    <input 
+                        disabled
+                        type="text"
+                        placeholder="Giá mua"
+                        class="w-full bg-[#e4e4e4] text-[#7c7c7c] text-base rounded-lg outline-none h-9 indent-2"
+                        id="deleteGiaXe"
+                    />
+                </div>
+                <div class="mb-4">
+                    <p class="font-medium mb-1">Ghi chú</p>
+                    <input 
+                        disabled
+                        type="text"
+                        placeholder="Giá mua"
+                        class="w-full bg-[#e4e4e4] text-[#7c7c7c] text-base rounded-lg outline-none h-9 indent-2"
+                        id="deleteGhiChu"
+                    />
+                </div>
+                <div class="w-full flex justify-center items-center h-10">
+                    <button onclick="deleteCar()" class="w-1/3 h-full px-4 cursor-pointer bg-blue text-white rounded-lg">
+                        <p class="text-lg font-medium">Xóa</p>
+                    </button>
+                </div>
+            </div>
+        </div>
     </body>
     <script>
         tailwind.config = {
@@ -354,5 +467,5 @@
         ;
 
     </script>
-    <script src="../js/garage_v1.js"></script>
+    <script src="../js/garage_v2.js"></script>
 </html>

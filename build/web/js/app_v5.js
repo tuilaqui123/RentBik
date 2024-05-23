@@ -10,17 +10,24 @@ $(document).ready(function(){
     });
     getCustomers();
     
-    getCccd();
+    getCccd('update');
+    getCccd('delete');
+    
     getGplxsForUpdate();
 
     $("#updateSelectedCcccd").change(function(){
         var cccd = $(this).val();
-        getCustomerByCccd(cccd);
+        getCustomerByCccd(cccd, 'update');
         
         $("#updateSelectedGplx").change(function(){
            var gplx = $(this).val();
            $("#updateGplx").val(gplx);
         });
+    });
+    
+    $("#deleteSelectedCcccd").change(function(){
+        var cccd = $(this).find("option:selected").text();
+        getCustomerByCccd(cccd, 'delete');
     });
 });
 
@@ -42,8 +49,13 @@ function showAddCustomer(){
 }
 
 function showUpdateCustomer(){
-    var addCustomer = document.getElementById('updateCustomer');
-    addCustomer.classList.toggle("hidden");
+    var updateCustomer = document.getElementById('updateCustomer');
+    updateCustomer.classList.toggle("hidden");
+}
+
+function showDeleteCustomer(){
+    var deleteCustomer = document.getElementById('deleteCustomer');
+    deleteCustomer.classList.toggle("hidden");
 }
 
 // Lấy danh sách giấy phép lái xe
@@ -147,6 +159,7 @@ async function getCustomers(){
     })
     .catch(err => console.log(err));
 }
+
 // Lấy danh sách theo điều kiện search
 async function getCustomersBySearch(searchInput){
     await fetch(`http://localhost:8080/api/v1/customers/search?keyword=${searchInput}`,{
@@ -199,7 +212,6 @@ async function getCustomersBySearch(searchInput){
     .catch(err => console.log(err));
 }
 
-
 // Thêm khách hàng mới
 async function addCustomer(){
     var cccd = document.getElementById("cccd").value;
@@ -244,7 +256,7 @@ async function addCustomer(){
         return;
     }
     
-    let gplxSet = new Set(parseInt(gplx, 10));
+    let gplxSet = new Set(gplx);
     let gplxArr = Array.from(gplxSet);
     await fetch('http://localhost:8080/api/v1/customers/add', {
         method: "POST",
@@ -281,8 +293,8 @@ async function addCustomer(){
 }
 
 // Lấy danh sách căn cước công dân
-async function getCccd(){
-    var cccds = document.getElementById("updateSelectedCcccd");
+async function getCccd(method){
+    var cccds = (method === 'update' ? document.getElementById("updateSelectedCcccd") : document.getElementById("deleteSelectedCcccd"));
     
     var defaultOption = document.createElement("option");
     defaultOption.text = "Căn cước công dân";
@@ -302,16 +314,15 @@ async function getCccd(){
         data.forEach(option => {
             var optionElement = document.createElement("option");
             optionElement.text = option.cccd;
-            optionElement.value = option.cccd;
+            optionElement.value = (method === 'update' ? option.cccd : option.id);
             cccds.add(optionElement);
         });
     })
     .catch(err => console.log(err));
 }
 
-
 // Lấy thông tin khách hàng theo cccd
-async function getCustomerByCccd(cccd){
+async function getCustomerByCccd(cccd, method){
     await fetch(`http://localhost:8080/api/v1/customers/${cccd}`,{
         method: "GET",
         headers: {
@@ -325,20 +336,29 @@ async function getCustomerByCccd(cccd){
             location.reload();
             return;
         }
-        $("#updateHoVaTen").val(data.fullname);
-        $('#updateHoVaTen').removeAttr('disabled');
         
-        $("#updateNgaySinh").val(data.birthday);
-        $('#updateNgaySinh').removeAttr('disabled');
-        
-        $("#updateSoDienThoai").val(data.phoneNumber);
-        $('#updateSoDienThoai').removeAttr('disabled');
-        
-        $("#updateGplx").val(data.gplxes[0].rank);
-        $('#updateGplx').removeAttr('disabled');
-        
-        $("#updateGhiChu").val(data.note);
-        $('#updateGhiChu').removeAttr('disabled');
+        if (method === 'update'){
+            $("#updateHoVaTen").val(data.fullname);
+            $('#updateHoVaTen').removeAttr('disabled');
+
+            $("#updateNgaySinh").val(data.birthday);
+            $('#updateNgaySinh').removeAttr('disabled');
+
+            $("#updateSoDienThoai").val(data.phoneNumber);
+            $('#updateSoDienThoai').removeAttr('disabled');
+
+            $("#updateGplx").val(data.gplxes[0].rank);
+            $('#updateGplx').removeAttr('disabled');
+
+            $("#updateGhiChu").val(data.note);
+            $('#updateGhiChu').removeAttr('disabled');
+        }else{
+            $("#deleteHoVaTen").val(data.fullname);
+            $("#deleteNgaySinh").val(data.birthday);
+            $("#deleteSoDienThoai").val(data.phoneNumber);
+            $("#deleteGplx").val(data.gplxes[0].rank);
+            $("#deleteGhiChu").val(data.note);
+        }
     })
     .catch(err => console.log(err));
 }
@@ -440,6 +460,37 @@ async function updateCustomer(){
             return;
         }
         alert("Cập nhật khách hàng thành công");
+    })
+    .catch(err => console.log(err))
+    .finally(async () => {
+        location.reload();
+    });
+}
+
+// Xóa khách hàng
+async function deleteCustomer(){
+    var customer_id = document.getElementById("deleteSelectedCcccd").value;
+    
+    fetch(`http://localhost:8080/api/v1/customers/${customer_id}`, {
+        method: "DELETE",
+        headers: {
+            'Accept': 'application/json',
+            'Content-Type': 'application/json'
+        }
+    })
+    .then((res) => res.json())
+    .then(data => {
+        if (data.message === "CCCD doesn't exist"){
+            alert("Căn cước công dân không tồn tại");
+            return;
+        }
+        
+        if (data.message === "This customer is still renting car"){
+            alert("Khách hàng này vẫn còn đang thuê xe");
+            return;
+        }
+        
+        alert("Xóa khách hàng thành công");
     })
     .catch(err => console.log(err))
     .finally(async () => {

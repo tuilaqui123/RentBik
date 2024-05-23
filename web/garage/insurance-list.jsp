@@ -71,10 +71,10 @@
                         <i class="fa-solid fa-filter"></i>
                     </button>
                     <div>
-                        <button class="h-12 w-14 cursor-pointer bg-[#e4e4e4] text-[#7c7c7c] text-xl rounded-lg">
+                        <button class="h-12 w-14 cursor-pointer bg-[#e4e4e4] text-[#7c7c7c] text-xl rounded-lg" onclick="showUpdateInsurance()">
                             <i class="fa-solid fa-pen-to-square"></i>
                         </button>
-                        <button class="h-12 w-14 cursor-pointer  bg-[#e4e4e4] text-[#7c7c7c] text-xl rounded-lg">
+                        <button class="h-12 w-14 cursor-pointer  bg-[#e4e4e4] text-[#7c7c7c] text-xl rounded-lg" onclick="showDeleteInsurance()">
                             <i class="fa-solid fa-trash"></i>
                         </button>
                      </div>                           
@@ -126,6 +126,117 @@
                 </tbody>
             </table>
         </div>
+        
+        <!-- update insurance -->
+        <div class="w-full h-screen absolute top-0 flex items-center justify-center hidden" id="updateInsurance">
+            <div class="absolute w-full h-[100vh] bg-gray-400 opacity-75"></div>
+            <div class="z-10 w-1/3 h-4/5 h-auto bg-white relative z-10 rounded-lg px-5 py-7 shadow-lg shadow-black">
+                <div class="flex flex-row justify-between items-center mb-7">
+                    <p class="text-xl font-medium">CHỈNH SỬA BẢO HIỂM</p>
+                    <i class="fa-solid fa-x text-lg font-black cursor-pointer hover:text-[#ff0000]" onclick="showUpdateInsurance()"></i>
+                </div>
+                <div class="mb-4">
+                    <p class="font-medium mb-1">Mã bảo hiểm</p>
+                    <div class="flex flex-row items-center gap-4 h-8">
+                        <select id="updateSelectedMabh" class="border border-gray-300 rounded-lg h-10 cursor-pointer text-black w-full bg-[#e4e4e4]">
+                        
+                        </select>
+                        <input 
+                            disabled
+                            type="text"
+                            placeholder="Mã bảo hiểm"
+                            class="w-full bg-[#e4e4e4] text-[#7c7c7c] text-base rounded-lg outline-none h-9 indent-2"
+                            id="updateMabh"
+                        />
+                    </div>
+                </div>
+                <div class="mb-4">
+                    <p class="font-medium mb-1">Ngày mua</p>
+                    <input 
+                        disabled
+                        type="date"
+                        class="w-full bg-[#e4e4e4] text-[#7c7c7c] text-base rounded-lg outline-none h-9 indent-2 pr-2"
+                        id="updateNgayMua"
+                    />
+                </div>
+                <div class="mb-4">
+                    <p class="font-medium mb-1">Ngày hết hạn</p>
+                    <input 
+                        type="date"
+                        disabled
+                        class="w-full bg-[#e4e4e4] text-[#7c7c7c] text-base rounded-lg outline-none h-9 indent-2 pr-2"
+                        id="updateNgayHetHan"
+                    />
+                </div>
+                <div class="mb-4">
+                    <p class="font-medium mb-1">Giá bảo hiểm</p>
+                    <input 
+                        disabled
+                        type="text"
+                        placeholder="Giá bảo hiểm"
+                        class="w-full bg-[#e4e4e4] text-[#7c7c7c] text-base rounded-lg outline-none h-9 indent-2"
+                        id="updateGiabh"
+                    />
+                </div>
+                <div class="w-full flex justify-center items-center h-10">
+                    <button onclick="updateInsurance()" class="w-1/3 h-full px-4 cursor-pointer bg-blue text-white rounded-lg">
+                        <p class="text-lg font-medium">Chỉnh sửa</p>
+                    </button>
+                </div>
+            </div>
+        </div>
+        
+        <!-- delete insurance -->
+        <div class="w-full h-screen absolute top-0 flex items-center justify-center hidden" id="deleteInsurance">
+            <div class="absolute w-full h-[100vh] bg-gray-400 opacity-75"></div>
+            <div class="z-10 w-1/3 h-4/5 h-auto bg-white relative z-10 rounded-lg px-5 py-7 shadow-lg shadow-black">
+                <div class="flex flex-row justify-between items-center mb-7">
+                    <p class="text-xl font-medium">XÓA BẢO HIỂM</p>
+                    <i class="fa-solid fa-x text-lg font-black cursor-pointer hover:text-[#ff0000]" onclick="showDeleteInsurance()"></i>
+                </div>
+                <div class="mb-4">
+                    <p class="font-medium mb-1">Mã bảo hiểm</p>
+                    <div class="flex flex-row items-center gap-4 h-8">
+                        <select id="deleteSelectedMabh" class="border border-gray-300 rounded-lg h-10 cursor-pointer text-black w-full bg-[#e4e4e4]">
+                        
+                        </select>
+                    </div>
+                </div>
+                <div class="mb-4">
+                    <p class="font-medium mb-1">Ngày mua</p>
+                    <input 
+                        disabled
+                        type="date"
+                        class="w-full bg-[#e4e4e4] text-[#7c7c7c] text-base rounded-lg outline-none h-9 indent-2 pr-2"
+                        id="deleteNgayMua"
+                    />
+                </div>
+                <div class="mb-4">
+                    <p class="font-medium mb-1">Ngày hết hạn</p>
+                    <input 
+                        type="date"
+                        disabled
+                        class="w-full bg-[#e4e4e4] text-[#7c7c7c] text-base rounded-lg outline-none h-9 indent-2 pr-2"
+                        id="deleteNgayHetHan"
+                    />
+                </div>
+                <div class="mb-4">
+                    <p class="font-medium mb-1">Giá bảo hiểm</p>
+                    <input 
+                        disabled
+                        type="text"
+                        placeholder="Giá bảo hiểm"
+                        class="w-full bg-[#e4e4e4] text-[#7c7c7c] text-base rounded-lg outline-none h-9 indent-2"
+                        id="deleteGiabh"
+                    />
+                </div>
+                <div class="w-full flex justify-center items-center h-10">
+                    <button onclick="deleteInsurance()" class="w-1/3 h-full px-4 cursor-pointer bg-blue text-white rounded-lg">
+                        <p class="text-lg font-medium">Xóa</p>
+                    </button>
+                </div>
+            </div>
+        </div>
     </body>
     <script>
         tailwind.config = {
@@ -143,5 +254,5 @@
         }
         ;
     </script>
-    <script src="../js/insurance_v4.js"> </script>
+    <script src="../js/insurance_v6.js"> </script>
 </html>

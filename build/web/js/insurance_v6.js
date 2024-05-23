@@ -8,11 +8,33 @@ $(document).ready(function(){
       }
    });
    getInsurances();
+   getMabhs('update');
+   getMabhs('delete');
+   
+   $("#updateSelectedMabh").change(function(){
+       var insuranceId = $(this).val();
+       getInfoInsuranceByMabh(insuranceId, 'update');
+   });
+   
+   $("#deleteSelectedMabh").change(function(){
+       var insuranceId = $(this).val();
+       getInfoInsuranceByMabh(insuranceId, 'delete');
+   });
 });
 
 function showAddCar(){
     var addCar = document.getElementById('addCar');
     addCar.classList.toggle("hidden");
+}
+
+function showUpdateInsurance(){
+    var updateInsurance = document.getElementById('updateInsurance');
+    updateInsurance.classList.toggle("hidden");
+}
+
+function showDeleteInsurance(){
+    var deleteInsurance = document.getElementById('deleteInsurance');
+    deleteInsurance.classList.toggle("hidden");
 }
 
 // Thêm bảo hiểm xe
@@ -132,6 +154,35 @@ async function addInsurance(){
     .catch(err => console.log(err));
 }
 
+// Lấy danh sách mã bảo hiểm
+async function getMabhs(method){
+    var mabhs = (method === 'update' ? document.getElementById("updateSelectedMabh") : document.getElementById("deleteSelectedMabh"));
+    
+    var defaultOption = document.createElement("option");
+    defaultOption.text = "Mã bảo hiểm";
+    defaultOption.value = "";
+    defaultOption.selected = true; 
+    defaultOption.disabled = true;
+    mabhs.appendChild(defaultOption);
+    
+    await fetch('http://localhost:8080/api/v1/insurances', {
+        method: "GET",
+        headers: {
+            "Content-Type": "application/json"
+        }
+    })
+    .then(res => res.json())
+    .then(data => {
+        data.forEach(option => {
+            var optionElement = document.createElement("option");
+            optionElement.text = option.mabh;
+            optionElement.value = option.id;
+            mabhs.add(optionElement);
+        });
+    })
+    .catch(err => console.log(err));
+}
+
 async function getMaBhByBienSoXe(searchInput){
     $.ajax({
         url: 'http://localhost:8080/api/v1/cars',
@@ -165,5 +216,136 @@ async function getMaBhByBienSoXe(searchInput){
         error: function(xhr, status, error) {
             console.error('Error fetching data:', error);
         }
+    });
+}
+
+// Lấy thông tin bảo hiểm theo mã bảo hiểm
+async function getInfoInsuranceByMabh(insurance_id, method){
+    await fetch(`http://localhost:8080/api/v1/insurances/${insurance_id}`,{
+        method: "GET",
+        headers: {
+            "Content-Type": "application/json"
+        }
+    })
+    .then(res => res.json())
+    .then(data => {
+        if (method === 'update'){
+            $("#updateMabh").val(data.mabh);
+            $('#updateMabh').removeAttr('disabled');
+
+            $("#updateNgayMua").val(data.purchaseDate);
+            $('#updateNgayMua').removeAttr('disabled');
+
+            $("#updateNgayHetHan").val(data.expiredDate);
+            $('#updateNgayHetHan').removeAttr('disabled');
+
+            $("#updateGiabh").val(data.purchasePrice);
+            $('#updateGiabh').removeAttr('disabled');
+        }else{
+            $("#deleteSelectedMabh").val(data.id);
+
+            $("#deleteNgayMua").val(data.purchaseDate);
+
+            $("#deleteNgayHetHan").val(data.expiredDate);
+
+            $("#deleteGiabh").val(data.purchasePrice);
+        }
+    })
+    .catch(err => console.log(err));
+}
+
+// Cập nhật bảo hiểm
+function updateInsurance(){
+    var mabh = document.getElementById("updateMabh").value;
+    var ngayMua = document.getElementById("updateNgayMua").value;
+    var ngayHetHan = document.getElementById("updateNgayHetHan").value;
+    var giaMua = document.getElementById("updateGiabh").value;
+    
+    if (mabh === ""){
+        alert("Vui lòng nhập mã bảo hiểm");
+        return;
+    }
+    
+    if (ngayMua === ""){
+        alert("Vui lòng nhập ngày mua");
+        return;
+    }
+    
+    if (ngayHetHan === ""){
+        alert("Vui lòng nhập ngày hết hạn");
+        return;
+    }
+    
+    if (giaMua === ""){
+        alert("Vui lòng nhập giá mua");
+        return;
+    }
+
+    if (ngayHetHan < ngayMua){
+        alert("Ngày hết hạn không được trước ngày mua");
+        return;
+    }
+    
+    if (isNaN(giaMua)){
+        alert("Giá mua phải là giá trị số");
+        return;
+    }
+    
+    var insuranceId = $("#updateSelectedMabh").val();
+    fetch(`http://localhost:8080/api/v1/insurances/update/${insuranceId}`, {
+        method: "PUT",
+        headers: {
+            'Accept': 'application/json',
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({
+            mabh: mabh,
+            purchaseDate: ngayMua,
+            expiredDate: ngayHetHan,
+            purchasePrice: giaMua
+        })
+    })
+    .then((res) => res.json())
+    .then(data => {
+        if (data.message === "Insurance doesn't exist"){
+            alert("Mã bảo hiểm không tồn tại");
+            return;
+        }
+        alert("Cập nhật bảo hiểm thành công");
+    })
+    .catch(err => console.log(err))
+    .finally(async () => {
+        location.reload();
+    });
+}
+
+// Xóa bảo hiểm
+async function deleteInsurance(){
+    var insurance_id = document.getElementById("deleteSelectedMabh").value;
+    
+    fetch(`http://localhost:8080/api/v1/insurances/delete/${insurance_id}`, {
+        method: "DELETE",
+        headers: {
+            'Accept': 'application/json',
+            'Content-Type': 'application/json'
+        }
+    })
+    .then((res) => res.json())
+    .then(data => {
+        if (data.message === "Insurance doesn't exist"){
+            alert("Bảo hiểm không tồn tại");
+            return;
+        }
+        
+        if (data.message === "This insurance is belongs to hiring car"){
+            alert("Bảo hiểm này đang được sử dụng bởi xe đang thuê");
+            return;
+        }
+        
+        alert("Xóa bảo hiểm thành công");
+    })
+    .catch(err => console.log(err))
+    .finally(async () => {
+        location.reload();
     });
 }
