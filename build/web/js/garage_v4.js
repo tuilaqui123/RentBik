@@ -679,3 +679,94 @@ async function getInfoCarById(car_id, method){
     })
     .catch(err => console.log(err));
 }
+
+// Cập nhật xe
+function updateCar(){
+    var bienSoXe = document.getElementById("updateBSX").value;
+    var carId = document.getElementById("updateSelectedBXS").value;
+    var giaMua = document.getElementById("updateGiaXe").value;
+    var ngayMua = document.getElementById("updateNgayMua").value;
+    var ghiChu = document.getElementById("updateGhiChu").value;
+    
+    if (bienSoXe === ""){
+        alert("Vui lòng nhập biển số xe");
+        return;
+    }
+    
+    if (giaMua === ""){
+        alert("Vui lòng nhập giá mua");
+        return;
+    }
+    
+    if (ngayMua === ""){
+        alert("Vui lòng nhập ngày mua");
+        return;
+    }
+    
+    if (ghiChu === ""){
+        alert("Vui lòng nhập ghi chú");
+        return;
+    }
+    
+    fetch(`http://localhost:8080/api/v1/cars/update/${carId}`, {
+        method: "PUT",
+        headers: {
+            'Accept': 'application/json',
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({
+            licensePlate: bienSoXe,
+            purchasePrice: giaMua,
+            purchaseDate: ngayMua,
+            carNote: ghiChu
+        })
+    })
+    .then((res) => res.json())
+    .then(data => {
+        if (data.message === "Car doesn't exist"){
+            alert("Xe không tồn tại");
+            return;
+        }
+        alert("Cập nhật xe thành công");
+    })
+    .catch(err => console.log(err))
+    .finally(async () => {
+        location.reload();
+    });
+}
+
+// Xóa xe
+async function deleteCar(){
+    var car_id = document.getElementById("deleteSelectedBXS").value;
+    
+    fetch(`http://localhost:8080/api/v1/cars/delete/${car_id}`, {
+        method: "DELETE",
+        headers: {
+            'Accept': 'application/json',
+            'Content-Type': 'application/json'
+        }
+    })
+    .then((res) => res.json())
+    .then(data => {
+        if (data.message === "Car doesn't exist"){
+            alert("Xe không tồn tại");
+            return;
+        }
+        
+        if (data.message === "This car is hiring"){
+            alert("Xe này đang được thuê");
+            return;
+        }
+        
+        if (data.message === "Have not already payment for this car"){
+            alert("Phiếu bảo trì xe chưa thanh toán");
+            return;
+        }
+        
+        alert("Xóa xe thành công");
+    })
+    .catch(err => console.log(err))
+    .finally(async () => {
+        location.reload();
+    });
+}

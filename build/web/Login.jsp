@@ -8,6 +8,7 @@
         <link rel="preconnect" href="https://fonts.googleapis.com">
         <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
         <link href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js" integrity="sha512-v2CJ7UaYy4JwqLDIrZUI/4hqeoQieOmAZNXBeQyjo21dadnwR+8ZaIJVT8EE2iyI61OV8e6M8PP2/4hpQINQ/g==" crossorigin="anonymous" referrerpolicy="no-referrer"> </script>
         <script src="https://cdn.tailwindcss.com"></script>
         <title>RENTBIK</title>
     </head>
@@ -31,6 +32,7 @@
                         <div class="flex flex-col mb-5">
                             <p class="font-semibold text-sm mb-1">Tài khoản</p>
                             <input 
+                                id="email"
                                 type="text"
                                 placeholder="Nhập email"
                                 class="border border-[#676767] h-11 rounded-md outline-none indent-2 font-normal"
@@ -39,6 +41,7 @@
                          <div class="flex flex-col mb-5">
                             <p class="font-semibold text-sm mb-1">Mật khẩu</p>
                             <input 
+                                id="password"
                                 type="password"
                                 placeholder="Nhập mật khẩu"
                                 class="border border-[#676767] h-11 rounded-md outline-none indent-2 font-normal"
@@ -46,8 +49,8 @@
                         </div>
                         <a href="login/Forgot.jsp" class="w-full text-right font-medium text-blue cursor-pointer">Quên mật khẩu?</a>
                     </div>
-                    <button class="w-full h-11 rounded-md outline-none bg-blue">
-                        <a href="customer/customer.jsp" class="text-white text-lg font-semibold">Đăng nhập</a>
+                    <button class="w-full h-11 rounded-md outline-none bg-blue" id="btnLogin" onclick="login()">
+                        <span class="text-white text-lg font-semibold">Đăng nhập</span>
                     </button>
                 </div>
 
@@ -69,4 +72,5 @@
           }
         }
     </script>
+    <script src="./js/login.js"></script>
 </html>

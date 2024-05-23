@@ -17,10 +17,10 @@ function getChart(){
             const myChart = new Chart(ctx, {
                 type: 'bar',
                 data: {
-                    labels: ['Tổng tiền thuê xe', 'Tổng tiền trả xe', 'Tổng tiền bảo trì', 'Tổng tiền bảo hiểm', 'Lợi nhuận'],
+                    labels: ['Tổng tiền thuê xe', 'Tổng tiền trả xe', 'Tổng tiền bảo trì', 'Tổng tiền bảo hiểm', 'Lợi nhuận', 'Tiền lỗ'],
                     datasets: [{
                         label: 'Doanh thu (VND), Vốn: 10.000.000 VND',
-                        data: [data.tien_thue_goc, data.tien_tra_xe, data.tien_bao_tri, data.tien_bao_hiem, data.loi_nhuan],
+                        data: [data.tien_thue_goc, data.tien_tra_xe, data.tien_bao_tri, data.tien_bao_hiem, (data.loi_nhuan < 0 ? 0 : data.loi_nhuan), (data.loi_nhuan < 0 ? 0-(data.loi_nhuan) : 0)],
                         backgroundColor: [
                             'rgba(255, 99, 132, 0.2)',
                             'rgba(54, 162, 235, 0.2)',

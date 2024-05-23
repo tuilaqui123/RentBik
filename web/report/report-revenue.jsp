@@ -65,31 +65,6 @@
             <div class="w-11/12 ">
                 <p class="text-2xl font-medium text-center">BÁO CÁO DOANH THU</p>
                 <div class="relative w-full pt-5 overflow-x-auto flex flex-col items-center justify-center">
-<!--                    <table class="w-full text-left rounded-t-lg overflow-hidden font-light ">
-                        <thead class="text-base text-white bg-blue h-14 ">
-                            <tr>
-                                <th scope="col" class="px-6  py-3">
-                                    Tổng tiền thuê xe gốc
-                                </th>
-                                <th scope="col" class="px-6 py-3">
-                                    Tổng tiền trả xe
-                                </th>
-                                <th scope="col" class="px-6 py-3">
-                                    Tồng tiền bảo trì
-                                </th>
-                                <th scope="col" class="px-6 py-3">
-                                    Tổng tiền bảo hiểm
-                                </th>
-                                <th scope="col" class="px-6 py-3">
-                                    Lợi nhuận
-                                </th>
-                            </tr>
-                        </thead>
-                        <tbody class="bg-white" id="tableReportRevenue">
-
-                        </tbody>
-                    </table>-->
-
                     <canvas id="myChart" width="400" height="200"></canvas>
                 </div>
             </div>
@@ -111,5 +86,5 @@
         }
         ;
     </script>
-    <script src="../js/report_revenue.js"></script>
+    <script src="../js/report_revenue_v1.js"></script>
 </html>

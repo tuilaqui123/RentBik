@@ -169,6 +169,12 @@ function getMaintenance(){
                             const formattedDate = new Date(item[prop]).toLocaleDateString('en-GB');
                             cell.textContent = formattedDate;
                         }else{
+                            if (prop === 'status' && item[prop] === 'Chua thanh toan'){
+                                cell.style.color = 'red';
+                            }
+                            if (prop === 'status' && item[prop] === 'Da thanh toan'){
+                                cell.style.color = 'blue';
+                            }
                             cell.textContent = item[prop];
                         }
                     }

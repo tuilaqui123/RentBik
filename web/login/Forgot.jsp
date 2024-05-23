@@ -8,6 +8,7 @@
         <link rel="preconnect" href="https://fonts.googleapis.com">
         <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
         <link href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js" integrity="sha512-v2CJ7UaYy4JwqLDIrZUI/4hqeoQieOmAZNXBeQyjo21dadnwR+8ZaIJVT8EE2iyI61OV8e6M8PP2/4hpQINQ/g==" crossorigin="anonymous" referrerpolicy="no-referrer"> </script>
         <script src="https://cdn.tailwindcss.com"></script>
         <title>RENTBIK</title>
     </head>
@@ -31,6 +32,7 @@
                         <div class="flex flex-col mb-5">
                             <p class="font-semibold text-sm mb-1">Nhập mã PIN</p>
                             <input 
+                                id="pincode"
                                 type="text"
                                 placeholder="Mã PIN"
                                 class="border border-gray-500 h-11 rounded-md outline-none indent-2 font-normal"
@@ -39,13 +41,14 @@
                          <div class="flex flex-col mb-5">
                             <p class="font-semibold text-sm mb-1">Nhập mật khẩu mới</p>
                             <input 
+                                id="newpassword"
                                 type="password"
                                 placeholder="Nhập mật khẩu mới"
                                 class="border border-gray-500 h-11 rounded-md outline-none indent-2 font-normal"
                             />
                         </div>
                     </div>
-                    <button class="w-full h-11 rounded-md outline-none bg-blue">
+                    <button class="w-full h-11 rounded-md outline-none bg-blue" onclick="changePassword()">
                         <p class="text-white text-lg font-semibold">Đổi mật khẩu</p>
                     </button>
                 </div>
@@ -54,18 +57,19 @@
         </div>
     </body>
     <script>
-    tailwind.config = {
-      theme: {
-        extend: {
-          colors: {
-            blue: '#354167',
-            lightblue: '#058ed9',
-            bone: 'f4ebd9',
-            red: 'a4243b',
-            orange: 'bd632f'
+        tailwind.config = {
+          theme: {
+            extend: {
+              colors: {
+                blue: '#354167',
+                lightblue: '#058ed9',
+                bone: 'f4ebd9',
+                red: 'a4243b',
+                orange: 'bd632f'
+              }
+            }
           }
-        }
-      }
-    }
-  </script>
+        };
+      </script>
+    <script src="../js/forgot.js"></script>
 </html>

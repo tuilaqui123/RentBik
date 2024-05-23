@@ -467,5 +467,5 @@
         ;
 
     </script>
-    <script src="../js/garage_v2.js"></script>
+    <script src="../js/garage_v4.js"></script>
 </html>
