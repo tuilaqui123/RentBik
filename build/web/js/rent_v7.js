@@ -19,7 +19,6 @@ $(document).ready(function(){
             var searchInput = $("#searchInput").val();
             getCarsBySearch(searchInput);
         });
-        
     });
 });
 
@@ -349,29 +348,29 @@ async function addRentingCar(){
     
     if (carId === undefined){
         alert("Hãy chọn xe thuê từ danh sách xe trong kho");
-        return;
+        return false;
     }
     
     var ngayThueXe = document.getElementById("ngayThueXe").value;
     
     if (ngayThueXe === ""){
         alert("Vui lòng chọn ngày thuê xe");
-        return;
+        return false;
     }
     
     var ngayTraXe = document.getElementById("ngayTraXe").value;
     
     if (ngayTraXe === ""){
         alert("Vui lòng chọn ngày trả xe");
-        return;
+        return false;
     }
     
     if (ngayTraXe < ngayThueXe){
         alert("Ngày trả xe không được trước ngày thuê xe");
-        return;
+        return false;
     }
     
-    fetch('http://localhost:8080/api/v1/rents/add', {
+    await fetch('http://localhost:8080/api/v1/rents/add', {
         method: "POST",
         headers: {
             'Accept': 'application/json',
@@ -388,24 +387,17 @@ async function addRentingCar(){
     .then(data => {
         if (data.message === "Car or customer not found"){
             alert("Xe hoặc khách hàng không tồn tại");
-            return;
+            return false;
         }
         
-        saveRentToPDF("phieuThueXe");
-        
         alert("Thêm phiếu thuê xe thành công");
+        return true;
     })
-    .catch(err => console.log(err))
+    .catch(err => {
+        console.log(err);
+        return false;
+    })
     .finally(async () => {
         location.reload();
     });
-}
-
-// Lưu phiêu thuê xe
-function saveRentToPDF(nameEle){
-    const element = document.getElementById(nameEle);
-    
-    html2pdf()
-            .from(element)
-            .save();
 }
