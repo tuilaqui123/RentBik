@@ -39,25 +39,3 @@ function login(){
     })
     .catch(err => console.log(err));
 }
-
-function changePassword(){
-    var pincode = $("#pincode").val();
-    var newpassword = $("#newpassword").val();
-    
-    fetch(`http://localhost:8080/api/v1/account/change_password?pin_code=${pincode}&new_password=${newpassword}`,{
-        method: "PUT",
-        headers: {
-            "Content-Type": "application/json"
-        }
-    })
-    .then(res => res.json())
-    .then(data => {
-        if (data.message === "Pin code doesn't match"){
-            alert("Mã PIN khồng đúng");
-            return;
-        }
-        alert("Đổi mật khẩu thành công");
-        window.location.href = '.,/Login.jsp';
-    })
-    .catch(err => console.log(err));
-}

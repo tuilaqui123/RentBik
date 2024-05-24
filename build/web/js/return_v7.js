@@ -32,7 +32,7 @@ async function getCustomers(cccd){
         
         $("#tableHiringCar").empty();
         const tableBody = document.getElementById('tableHiringCar');
-        let check = false;
+        var check = false;
         if (data.rents.length === 0) {
             const row = document.createElement('tr');
             row.classList.add('bg-bone', 'border-b');
@@ -72,8 +72,6 @@ async function getCustomers(cccd){
                     });
 
                     tableBody.appendChild(row);
-                }else {
-                    check = false;
                 }
             });
             

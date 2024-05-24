@@ -216,10 +216,10 @@ async function getCustomers(cccd){
         if (!newRenting.classList.contains("hidden")){
             newRenting.classList.toggle("hidden");
         }
-        
+        console.log(data);
         $("#tableHiringCar").empty();
         const tableBody = document.getElementById('tableHiringCar');
-        let check = false;
+        var check = false;
         if (data.rents.length === 0) {
             const row = document.createElement('tr');
             row.classList.add('bg-bone', 'border-b');
@@ -259,8 +259,6 @@ async function getCustomers(cccd){
                     });
 
                     tableBody.appendChild(row);
-                }else {
-                    check = false;
                 }
             });
             
@@ -342,7 +340,7 @@ const getCustomerID = async (soDienThoaiInput) => {
 };
 
 // Thêm phiếu thuê xe
-async function addRetingCar(){
+async function addRentingCar(){
     var soDienThoai = document.getElementById("soDienThoai").value;
     var customerId = await getCustomerID(soDienThoai);
     
@@ -368,6 +366,11 @@ async function addRetingCar(){
         return;
     }
     
+    if (ngayTraXe < ngayThueXe){
+        alert("Ngày trả xe không được trước ngày thuê xe");
+        return;
+    }
+    
     fetch('http://localhost:8080/api/v1/rents/add', {
         method: "POST",
         headers: {
@@ -387,10 +390,22 @@ async function addRetingCar(){
             alert("Xe hoặc khách hàng không tồn tại");
             return;
         }
+        
+        saveRentToPDF("phieuThueXe");
+        
         alert("Thêm phiếu thuê xe thành công");
     })
     .catch(err => console.log(err))
     .finally(async () => {
         location.reload();
     });
+}
+
+// Lưu phiêu thuê xe
+function saveRentToPDF(nameEle){
+    const element = document.getElementById(nameEle);
+    
+    html2pdf()
+            .from(element)
+            .save();
 }

@@ -11,6 +11,7 @@
         <link href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
         <script src="https://cdn.tailwindcss.com"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js" integrity="sha512-v2CJ7UaYy4JwqLDIrZUI/4hqeoQieOmAZNXBeQyjo21dadnwR+8ZaIJVT8EE2iyI61OV8e6M8PP2/4hpQINQ/g==" crossorigin="anonymous" referrerpolicy="no-referrer"> </script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
         <title>RENTBIK</title>
     </head>
     <style>
@@ -238,7 +239,7 @@
                 </div>
             </div>
             <!--        bill-->
-            <div class="flex flex-col w-full h-auto items-center justify-start pt-10 mb-10">
+            <div class="flex flex-col w-full h-auto items-center justify-start pt-10 mb-10" id="phieuThueXe">
                 <div class="w-11/12 ">
                     <p class="text-xl font-medium">PHIẾU THUÊ XE</p>
                     <div class="bg-[#F4EBD9] p-5 mt-5 rounded-lg">
@@ -346,7 +347,7 @@
 
                         </div>
                         <div class="w-full mt-5 flex justify-center">
-                            <button onclick="addRetingCar()" class="h-12 w-1/6 cursor-pointer bg-blue text-white  rounded-lg">
+                            <button onclick="addRentingCar()" class="h-12 w-1/6 cursor-pointer bg-blue text-white  rounded-lg">
                                 <p class="font-medium text-xl">Lưu phiếu</p>
                             </button>
                         </div>
@@ -372,5 +373,5 @@
         ;
 
     </script>
-    <script src="../js/rent_v6.js"></script>
+    <script src="../js/rent_v7.js"></script>
 </html>
