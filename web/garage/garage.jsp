@@ -455,5 +455,5 @@
         ;
 
     </script>
-    <script src="../js/garage_v4.js"></script>
+    <script src="../js/garage_v5.js"></script>
 </html>

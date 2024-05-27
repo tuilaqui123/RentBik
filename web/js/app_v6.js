@@ -246,8 +246,12 @@ async function addCustomer(){
         return;
     }
     
-    if (ghiChu === ""){
-        alert("Vui lòng nhập ghi chú");
+    var ngaySinhDate = new Date(ngaySinh);
+    var currentDate = new Date();
+    currentDate.setHours(0, 0, 0, 0);
+    
+    if (ngaySinhDate > currentDate){
+        alert("Ngày sinh không được sau ngày hiện tại");
         return;
     }
     
@@ -417,11 +421,6 @@ async function updateCustomer(){
     
     if (gplx === ""){
         alert("Vui lòng chọn giấy phép lái xe");
-        return;
-    }
-    
-    if (ghiChu === ""){
-        alert("Vui lòng nhập ghi chú");
         return;
     }
     

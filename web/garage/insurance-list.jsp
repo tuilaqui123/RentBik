@@ -245,5 +245,5 @@
         }
         ;
     </script>
-    <script src="../js/insurance_v6.js"> </script>
+    <script src="../js/insurance_v7.js"> </script>
 </html>
